@@ -1,32 +1,45 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <Home />
+    <Navigator />
   </div>
 </template>
 
+<script>
+import Navigator from "./components/Navigator";
+import Home from "./components/Home.vue";
+export default {
+  name: "App",
+  components: { Navigator, Home },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  outline: none;
 }
 
-#nav {
-  padding: 30px;
+html,
+body {
+  background: black;
+  max-height: 100vh;
+  overflow: hidden;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+#app {
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 </style>
