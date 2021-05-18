@@ -18,7 +18,10 @@
       <p class="time">{{ time }}</p>
     </div>
     <transition name="fade">
-      <NavigatorMenu v-if="navigationMenuView" />
+      <NavigatorMenu @sleep="sleep = $event" v-if="navigationMenuView" />
+    </transition>
+    <transition name="opacity">
+      <div class="shut-down" v-if="sleep"></div>
     </transition>
   </div>
 </template>
@@ -31,6 +34,7 @@ export default {
     return {
       time: null,
       navigationMenuView: false,
+      sleep: false
     };
   },
   components: { NavigatorMenu },
@@ -56,7 +60,7 @@ export default {
   background: none;
 }
 .navigator {
-  height: 50px;
+  height: 40px;
   background: #ddd;
   display: flex;
   align-items: center;
@@ -101,6 +105,17 @@ export default {
   }
 }
 
+.shut-down {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  cursor: none;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transform: scale(1);
@@ -110,5 +125,15 @@ export default {
 .fade-leave-to {
   transform: translate(-30px, 50px) scale(0.8);
   opacity: 0;
+}
+
+.opacity-enter-active,
+.opacity-leave-active {
+  transition: 300ms;
+}
+.opacity-enter,
+.opacity-leave-to {
+  opacity: 0;
+  transition: 800ms;
 }
 </style>

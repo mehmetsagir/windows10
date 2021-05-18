@@ -16,7 +16,7 @@ export default {
 
 <style lang="scss">
 .home {
-  height: calc(100vh - 50px);
+  height: calc(100vh - 40px);
   background: url("../assets/wallpaper.jpg") no-repeat;
   background-position: center;
   background-size: cover;
