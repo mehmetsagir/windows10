@@ -1,5 +1,5 @@
 <template>
-  <div class="navigator" @click.self="navigationMenuView = false">
+  <div class="navigator" v-click-outside="hide">
     <div class="navigator-bar">
       <button
         class="navigator-button"
@@ -7,6 +7,11 @@
       >
         <i class="fab fa-windows"></i>
       </button>
+      <div v-if="$store.state.folders" class="folders">
+        <div v-for="(folder, key) in $store.state.folders" :key="key">
+          <NavFolder :folder="folder" />
+        </div>
+      </div>
     </div>
     <div class="detail">
       <i class="fas fa-chevron-up"></i>
@@ -18,7 +23,7 @@
       <p class="time">{{ time }}</p>
     </div>
     <transition name="fade">
-      <NavigatorMenu @sleep="sleep = $event" v-if="navigationMenuView" />
+      <NavigatorMenu @sleep="sleep = $event" v-if="navigationMenuView" :menuView="navigationMenuView" @hideMenu="navigationMenuView = $event" />
     </transition>
     <transition name="opacity">
       <div class="shut-down" v-if="sleep"></div>
@@ -28,16 +33,22 @@
 
 <script>
 import NavigatorMenu from "./NavigatorMenu.vue";
+import NavFolder from "./NavFolder";
 export default {
   name: "Navigator",
   data() {
     return {
       time: null,
       navigationMenuView: false,
-      sleep: false
+      sleep: false,
     };
   },
-  components: { NavigatorMenu },
+  components: { NavFolder, NavigatorMenu },
+  methods: {
+    hide() {
+      this.navigationMenuView = false
+    }
+  },
   created() {
     setInterval(() => {
       const date = new Date();
@@ -51,7 +62,7 @@ export default {
           : date.getMinutes();
       this.time = hours + ":" + minutes;
     }, 100);
-  },
+  }
 };
 </script>
 
@@ -60,25 +71,35 @@ export default {
   background: none;
 }
 .navigator {
-  height: 40px;
+  max-width: 100vw;
+  height: 30px;
   background: #ddd;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
   &-bar {
     height: 100%;
+    display: flex;
     .navigator-button {
       height: 100%;
+      padding: 0 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 50px;
       &:hover i {
         color: #00a2ed;
       }
       i {
         transition: 150ms;
-        font-size: 25px;
+        font-size: 20px;
+      }
+    }
+    .folders {
+      display: flex;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
   }

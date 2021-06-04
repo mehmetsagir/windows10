@@ -77,15 +77,16 @@
 <script>
 export default {
   name: "NavigatorMenu",
+  props: ["menuView"],
   methods: {
     reload() {
-      window.location.reload()
+      window.location.reload();
     },
     sleep() {
-      this.$emit('sleep', true)
-      document.addEventListener('keydown', () => {
-        this.$emit('sleep', false)
-      })
+      this.$emit("sleep", true);
+      document.addEventListener("keydown", () => {
+        this.$emit("sleep", false);
+      });
     }
   }
 };
@@ -95,11 +96,12 @@ export default {
 .navigator-menu {
   position: absolute;
   left: 0;
-  bottom: 40px;
+  bottom: 30px;
   height: 500px;
   width: 330px;
   background: rgba(#ddd, 0.9);
   display: flex;
+  z-index: 99;
 
   .left-bar {
     height: 100%;
@@ -194,7 +196,7 @@ export default {
       right: 0;
       top: -300%;
       background: #ddd;
-      box-shadow: -4px 0 15px rgba(#000, .2);
+      box-shadow: -4px 0 15px rgba(#000, 0.2);
       width: 100%;
     }
   }

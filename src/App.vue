@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Home />
+    <Home class="home" />
     <Navigator />
   </div>
 </template>
@@ -10,7 +10,7 @@ import Navigator from "./components/Navigator";
 import Home from "./components/Home.vue";
 export default {
   name: "App",
-  components: { Navigator, Home },
+  components: { Navigator, Home }
 };
 </script>
 
@@ -31,11 +31,34 @@ body {
   overflow: hidden;
 }
 
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  box-shadow: none;
+  border: 0;
+}
+
 #app {
   height: 100vh;
   width: 100vw;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  .home {
+    flex: 1;
+  }
 }
+
 
 button {
   background: none;
