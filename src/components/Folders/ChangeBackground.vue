@@ -45,12 +45,7 @@ export default {
   },
   methods: {
     changeBackground() {
-      if (localStorage.getItem('windows-settings')) {
-        const settings = JSON.parse(localStorage.getItem('windows-settings'))
-        settings.background = this.selectedImage
-        localStorage.setItem('windows-settings', JSON.stringify(settings))
-        changeBackground(this.selectedImage)
-      }
+      changeBackground(this.selectedImage)
     },
   }
 };

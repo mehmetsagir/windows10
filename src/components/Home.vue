@@ -18,19 +18,12 @@ import changeBackground from "../assets/js/changeBackground";
 export default {
   name: "Home",
   components: { Folder, FolderList },
-  created() {
-
-  },
   mounted() {
-    const settings = {
-      background: 'wallpaper.jpg'
-    }
     if (localStorage.getItem('windows-settings')) {
       const settings = JSON.parse(localStorage.getItem('windows-settings'))
       changeBackground(settings.background)
     } else {
-      localStorage.setItem('windows-settings', JSON.stringify(settings))
-      changeBackground(settings.background)
+      changeBackground()
     }
   }
 };
