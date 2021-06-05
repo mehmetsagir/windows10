@@ -1,4 +1,4 @@
-const changeBackground =  (imageName = 'https://lh3.google.com/u/0/d/1w7RAigPwIFIfbbJzcFEnB3f_XZ0-fbOA=w1920-h1009-iv1') => {
+const changeBackground =  (imageName = 'https://mehmetsagir.com/wallpaper/macos-big-sur-5120x2880-night-apple-october-2020-event-5k-23099.jpg') => {
 
   if(localStorage.getItem('windows-settings')) {
     const settings = JSON.parse(localStorage.getItem('windows-settings'))
