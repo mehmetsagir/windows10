@@ -28,12 +28,9 @@ export default {
           "https://mehmetsagir.com/wallpaper/macos-big-sur-5120x2880-night-apple-october-2020-event-5k-23099.jpg",
           "https://mehmetsagir.com/wallpaper/2560x1600.jpg",
           "https://mehmetsagir.com/wallpaper/Anti%20Coding%20Coding%20Club.png",
-          "https://mehmetsagir.com/wallpaper/Wallpaper.png",
           "https://mehmetsagir.com/wallpaper/cameron-venti-khqkxdDvs-M-unsplash.jpg",
           "https://mehmetsagir.com/wallpaper/jordan-whitfield-sm3Ub_IJKQg-unsplash.jpg",
           "https://mehmetsagir.com/wallpaper/marco-xu-zcvWUNrmPBQ-unsplash.jpg",
-          "https://mehmetsagir.com/wallpaper/new-wallpaper.jpg",
-          "https://mehmetsagir.com/wallpaper/newss.jpg",
           "https://mehmetsagir.com/wallpaper/no-man-s-sky-wallpaper-8k-110377.jpg",
           "https://mehmetsagir.com/wallpaper/pexels-eberhard-grossgasteiger-1367192.jpg",
           "https://mehmetsagir.com/wallpaper/pexels-jeremy-bishop-2923595.jpg",
@@ -49,7 +46,7 @@ export default {
   methods: {
     changeBackground() {
       changeBackground(this.selectedImage)
-    },
+    }
   }
 };
 </script>
