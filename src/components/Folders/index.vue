@@ -9,6 +9,7 @@
     <VSvgIcons v-if="comp == 'VSvgIcons'" />
     <AnimateCSS v-if="comp == 'AnimateCSS'" />
     <GithubFinder v-if="comp == 'GithubFinder'" />
+    <ChangeBackground v-if="comp == 'changeBackground'" />
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import TodoApp from "./TodoApp";
 import VSvgIcons from "./VSvgIcons";
 import AnimateCSS from "./AnimateCSS";
 import GithubFinder from "./GithubFinder";
+import ChangeBackground from "./ChangeBackground";
 export default {
   name: "Folder",
   props: {
@@ -30,6 +32,6 @@ export default {
       type: String
     }
   },
-  components: { GithubFinder, AnimateCSS, VSvgIcons, TodoApp, Instagram, VueCountriesCities, FastTyping, Chrome, Twitter }
+  components: { ChangeBackground, GithubFinder, AnimateCSS, VSvgIcons, TodoApp, Instagram, VueCountriesCities, FastTyping, Chrome, Twitter }
 };
 </script>

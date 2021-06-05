@@ -2,15 +2,17 @@
   <div id="app">
     <Home class="home" />
     <Navigator />
+    <ContextMenu />
   </div>
 </template>
 
 <script>
 import Navigator from "./components/Navigator";
 import Home from "./components/Home.vue";
+import ContextMenu from "./components/ContextMenu";
 export default {
   name: "App",
-  components: { Navigator, Home }
+  components: { ContextMenu, Navigator, Home }
 };
 </script>
 
@@ -19,8 +21,6 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   outline: none;
 }
 

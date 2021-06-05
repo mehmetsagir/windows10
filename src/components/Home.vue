@@ -1,33 +1,45 @@
 <template>
-  <div>
-    <div class="home">
-      <div v-if="$store.state.folders">
-        <div v-for="(folder, index) in $store.state.folders" :key="index">
-          <div v-if="folder.show">
-            <Folder :comp="folder.path" />
-          </div>
+  <div id="home">
+    <div v-if="$store.state.folders">
+      <div v-for="(folder, index) in $store.state.folders" :key="index">
+        <div v-if="folder.show">
+          <Folder :comp="folder.path" />
         </div>
       </div>
-      <FolderList />
     </div>
+    <FolderList />
   </div>
 </template>
 
 <script>
 import FolderList from "./FolderList.vue";
 import Folder from "./Folders";
+import changeBackground from "../assets/js/changeBackground";
 export default {
   name: "Home",
   components: { Folder, FolderList },
+  created() {
+
+  },
+  mounted() {
+    const settings = {
+      background: 'wallpaper.jpg'
+    }
+    if (localStorage.getItem('windows-settings')) {
+      const settings = JSON.parse(localStorage.getItem('windows-settings'))
+      changeBackground(settings.background)
+    } else {
+      localStorage.setItem('windows-settings', JSON.stringify(settings))
+      changeBackground(settings.background)
+    }
+  }
 };
 </script>
 
 <style lang="scss">
 .home {
   height: 100%;
-  background: url("../assets/wallpaper.jpg") no-repeat;
-  background-position: center;
-  background-size: cover;
+  width: 100%;
   position: relative;
   overflow: hidden;
 }

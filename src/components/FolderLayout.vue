@@ -27,7 +27,7 @@
           </li>
         </ul>
       </div>
-      <div class="content">
+      <div class="content" :style="overflow && 'overflow-y: auto'">
         <slot />
       </div>
   </div>
@@ -45,7 +45,7 @@ export default {
       folder: null
     }
   },
-  props: ["folderName"],
+  props: ["folderName", "overflow"],
   methods: {
     closeFolder() {
       if (localStorage.getItem('windows-folders')) {
@@ -61,7 +61,7 @@ export default {
       updateFullScreen(this.folderName)
       this.$store.state.folders = getFolders()
       this.$store.state.folders.map(folder => {
-        if(folder.path == this.folderName) this.fullScreenStatus = folder.fullScreen
+        if(folder.path === this.folderName) this.fullScreenStatus = folder.fullScreen
       })
     }
   },
@@ -105,7 +105,9 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 35px;
+    min-height: 35px;
     border-bottom: 1px solid rgba(#ccc, .4);
+    font-family: sans-serif;
     *::selection {
       background: none;
     }
