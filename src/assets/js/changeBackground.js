@@ -6,7 +6,7 @@ const changeBackground =  (imageName = 'https://mehmetsagir.com/wallpaper/macos-
     localStorage.setItem('windows-settings', JSON.stringify(settings))
   } else {
     localStorage.setItem('windows-settings', JSON.stringify({
-      settings: imageName
+      background: imageName
     }))
   }
 
