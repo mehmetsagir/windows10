@@ -9,14 +9,18 @@
           </div>
         </div>
         <div class="actions">
-          <button @click="changeBackground">Uygula</button>
+          <button class="get-file-image">
+            <img src="../../assets/attachments-icon.svg" alt="attachments-icon">
+            <input type="file" id="file" @change="handleImage" accept="image/*">
+          </button>
+          <button @click="changeBackground" class="apply">Uygula</button>
         </div>
       </div>
   </Layout>
 </template>
 
 <script>
-import changeBackground from "../../assets/js/changeBackground";
+import background from "../../assets/js/changeBackground";
 import Layout from "../FolderLayout";
 export default {
   name: "ChangeBackground",
@@ -25,27 +29,29 @@ export default {
     return {
       selectedImage: '',
       imagesName: [
-          "https://mehmetsagir.com/wallpaper/macos-big-sur-5120x2880-night-apple-october-2020-event-5k-23099.jpg",
-          "https://mehmetsagir.com/wallpaper/2560x1600.jpg",
-          "https://mehmetsagir.com/wallpaper/Anti%20Coding%20Coding%20Club.png",
-          "https://mehmetsagir.com/wallpaper/cameron-venti-khqkxdDvs-M-unsplash.jpg",
-          "https://mehmetsagir.com/wallpaper/jordan-whitfield-sm3Ub_IJKQg-unsplash.jpg",
-          "https://mehmetsagir.com/wallpaper/marco-xu-zcvWUNrmPBQ-unsplash.jpg",
-          "https://mehmetsagir.com/wallpaper/no-man-s-sky-wallpaper-8k-110377.jpg",
-          "https://mehmetsagir.com/wallpaper/pexels-eberhard-grossgasteiger-1367192.jpg",
-          "https://mehmetsagir.com/wallpaper/pexels-jeremy-bishop-2923595.jpg",
-          "https://mehmetsagir.com/wallpaper/pexels-jonathan-petersson-1237119.jpg",
-          "https://mehmetsagir.com/wallpaper/pexels-mengliu-di-3064079.jpg",
-          "https://mehmetsagir.com/wallpaper/pexels-roberto-nickson-2559941.jpg",
-          "https://mehmetsagir.com/wallpaper/pexels-roberto-shumski-1903702.jpg",
-          "https://mehmetsagir.com/wallpaper/pexels-stefan-stefancik-919606.jpg",
-          "https://mehmetsagir.com/wallpaper/sci_fi_science_space_fantasy_art_artwork_artistic_futuristic_12000x6000.jpg"
-      ]
+          "https://mehmetsagir.com/wallpaper/1.webp",
+          "https://mehmetsagir.com/wallpaper/2.webp",
+          "https://mehmetsagir.com/wallpaper/3.webp",
+          "https://mehmetsagir.com/wallpaper/4.webp",
+          "https://mehmetsagir.com/wallpaper/gifwallpaper.gif",
+       ]
     }
   },
   methods: {
     changeBackground() {
-      changeBackground(this.selectedImage)
+      background(this.selectedImage)
+    },
+    handleImage(e) {
+      const file = e.target.files[0]
+
+       if (file.name.toLowerCase().match(/\.jpe?g|png|webp|gif/)) {
+        const reader = new FileReader()
+
+        reader.addEventListener('load', function(e) {
+          background(e.target.result)
+        })
+        reader.readAsDataURL(file)
+      }
     }
   }
 };
@@ -88,15 +94,44 @@ export default {
     background: #fafafa;
     position: sticky;
     width: 100%;
+    height: 60px;
+    min-height: 60px;
     bottom: 0;
-    text-align: right;
-    padding: 10px 25px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 25px;
+    border-top: 1px solid #ddd;
     button {
-      background: #3b70ff;
-      padding: 10px 50px;
-      font-size: 15px;
+      height: 35px;
       border-radius: 3px;
+
+    }
+    .apply {
+      background: #3b70ff;
+      padding: 0 50px;
+      font-size: 15px;
       color: #fafafa;
+      transition: background 150ms;
+      &:hover {
+        background: darken(#3b70ff, 10%);
+      }
+    }
+    .get-file-image {
+      padding: 0 20px;
+      margin-right: 10px;
+      position: relative;
+      img {
+        width: 30px;
+      }
+      input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        opacity: 0;
+      }
     }
   }
 }
