@@ -9,6 +9,7 @@
     <Folder icon="vSvgIcons" title="Vue Svg Icons" path="VSvgIcons" />
     <Folder icon="animateCSS" title="Animate CSS" path="AnimateCSS" />
     <Folder icon="githubFinder" title="Github Finder" path="GithubFinder" />
+    <Folder icon="cardGame" title="Card Game" path="CardGame" />
   </div>
 </template>
 

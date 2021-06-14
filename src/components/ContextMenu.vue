@@ -1,10 +1,10 @@
 <template>
   <ul id="rmenu" class="context-menu" v-click-outside="hide">
     <li>
-      <button @click="reload">Yenile</button>
+      <button @click="reload">Reload</button>
     </li>
     <li>
-      <button @click="changeBackgroundShow('changeBackground', 'thisPC', 'Arkaplan Değiştir')">Arkaplan Değiştir</button>
+      <button @click="changeBackgroundShow('changeBackground', 'thisPC', 'Change Background')">Change Background</button>
     </li>
   </ul>
 </template>

@@ -13,7 +13,7 @@
             <img src="../../assets/attachments-icon.svg" alt="attachments-icon">
             <input type="file" id="file" @change="handleImage" accept="image/*">
           </button>
-          <button @click="changeBackground" class="apply">Uygula</button>
+          <button @click="changeBackground" class="apply">Apply</button>
         </div>
       </div>
   </Layout>

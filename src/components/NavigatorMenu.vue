@@ -3,7 +3,7 @@
     <div class="left-bar">
       <button>
         <i class="fas fa-grip-lines"></i>
-        <span>Başlangıç</span>
+        <span>Start</span>
       </button>
       <div class="actions">
         <button>
@@ -12,57 +12,57 @@
         </button>
         <button>
           <i class="far fa-file"></i>
-          <span>Belgeler</span>
+          <span>Documents</span>
         </button>
         <button>
           <i class="fas fa-download"></i>
-          <span>İndirmeler</span>
+          <span>Downloads</span>
         </button>
         <button>
           <i class="fas fa-music"></i>
-          <span>Müzik</span>
+          <span>Music</span>
         </button>
         <button>
           <i class="fas fa-image"></i>
-          <span>Resimler</span>
+          <span>Pictures</span>
         </button>
         <button>
           <i class="fas fa-video"></i>
-          <span>Videolar</span>
+          <span>Videos</span>
         </button>
         <button>
           <i class="fas fa-desktop"></i>
-          <span>Ağ</span>
+          <span>Network</span>
         </button>
         <button>
           <i class="fas fa-id-card-alt"></i>
-          <span>Kişisel Klasör</span>
+          <span>Personal Folder</span>
         </button>
         <button>
           <i class="fas fa-file"></i>
-          <span>Dosya Gezgini</span>
+          <span>File Explorer</span>
         </button>
         <button>
           <i class="fas fa-cog"></i>
-          <span>Ayarlar</span>
+          <span>Settings</span>
         </button>
         <button class="open-btn">
           <div class="open-btn-modal">
             <button @click="sleep">
               <i class="far fa-moon"></i>
-              <span>Uyku</span>
+              <span>Sleep</span>
             </button>
             <button @click="reload">
               <i class="fas fa-undo"></i>
-              <span>Yeniden Başlat</span>
+              <span>Restart</span>
             </button>
             <button @click="sleep">
               <i class="fas fa-power-off"></i>
-              <span>Oturumu Kapat</span>
+              <span>Shut down</span>
             </button>
           </div>
           <i class="fas fa-power-off"></i>
-          <span>Aç/Kapa</span>
+          <span>On/Off</span>
         </button>
       </div>
     </div>

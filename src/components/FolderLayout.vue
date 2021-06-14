@@ -1,35 +1,35 @@
 <template>
   <div class="container folder-container" :class="fullScreenStatus ? `fullScreen ${folderName}` : folderName">
-      <div class="resizer nw"></div>
-      <div class="resizer ne"></div>
-      <div class="resizer sw"></div>
-      <div class="resizer se"></div>
-      <div class="folder-header" @dblclick="fullScreen">
-        <div class="info" v-if="folder">
-          <img :src="require(`/src/assets/folder-icons/${folder.icon}.svg`)" :alt="folder.path">
-          <p>{{ folder.title }}</p>
-        </div>
-        <ul>
-          <li>
-            <button @click="updateShowModal">
-              <img src="../assets/line.svg" width="10" alt="line icon" />
-            </button>
-          </li>
-          <li>
-            <button @click="fullScreen">
-              <img src="../assets/squares.svg" width="10" alt="line icon" />
-            </button>
-          </li>
-          <li>
-            <button @click="closeFolder">
-              <img src="../assets/cancel.svg" width="10" alt="line icon" />
-            </button>
-          </li>
-        </ul>
+    <div class="resizer nw"></div>
+    <div class="resizer ne"></div>
+    <div class="resizer sw"></div>
+    <div class="resizer se"></div>
+    <div class="folder-header" @dblclick="fullScreen">
+      <div class="info" v-if="folder">
+        <img :src="require(`/src/assets/folder-icons/${folder.icon}.svg`)" :alt="folder.path">
+        <p>{{ folder.title }}</p>
       </div>
-      <div class="content" :style="overflow && 'overflow-y: auto'">
-        <slot />
-      </div>
+      <ul>
+        <li>
+          <button @click="updateShowModal">
+            <img src="../assets/line.svg" width="10" alt="line icon" />
+          </button>
+        </li>
+        <li>
+          <button @click="fullScreen">
+            <img src="../assets/squares.svg" width="10" alt="line icon" />
+          </button>
+        </li>
+        <li>
+          <button @click="closeFolder">
+            <img src="../assets/cancel.svg" width="10" alt="line icon" />
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="content" :style="overflow ? 'overflow-y: auto' : 'overflow: hidden'">
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -140,6 +140,7 @@ export default {
   .content {
     position: relative;
     width: 100%;
+    height: 100%;
     flex: 1;
   }
   .resizer {
