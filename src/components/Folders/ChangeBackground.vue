@@ -39,7 +39,9 @@ export default {
   },
   methods: {
     changeBackground() {
-      background(this.selectedImage)
+      if(this.selectedImage.length > 0) {
+        background(this.selectedImage)
+      }
     },
     handleImage(e) {
       const file = e.target.files[0]

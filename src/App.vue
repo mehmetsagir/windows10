@@ -22,6 +22,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   outline: none;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 html,
