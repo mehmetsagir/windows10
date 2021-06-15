@@ -1,4 +1,4 @@
-const changeBackground =  (imageName = 'https://mehmetsagir.com/wallpaper/macos-big-sur-5120x2880-night-apple-october-2020-event-5k-23099.jpg') => {
+const changeBackground =  (imageName = 'https://mehmetsagir.com/wallpaper/3.webp') => {
 
   if(localStorage.getItem('windows-settings')) {
     const settings = JSON.parse(localStorage.getItem('windows-settings'))
@@ -9,6 +9,8 @@ const changeBackground =  (imageName = 'https://mehmetsagir.com/wallpaper/macos-
       background: imageName
     }))
   }
+
+  console.log(imageName)
 
   const el = document.getElementById('home')
   el.style.background = `url(${imageName})`

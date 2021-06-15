@@ -19,12 +19,7 @@ export default {
   name: "Home",
   components: { Folder, FolderList },
   mounted() {
-    if (localStorage.getItem('windows-settings')) {
-      const settings = JSON.parse(localStorage.getItem('windows-settings'))
-      changeBackground(settings.background)
-    } else {
-      changeBackground()
-    }
+    changeBackground()
   }
 };
 </script>
