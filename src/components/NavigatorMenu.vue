@@ -52,7 +52,7 @@
               <i class="far fa-moon"></i>
               <span>Sleep</span>
             </button>
-            <button @click="sleep">
+            <button @click="shutDown">
               <i class="fas fa-power-off"></i>
               <span>Shut down</span>
             </button>
@@ -81,6 +81,21 @@
         <p>Restarting</p>
       </div>
     </transition>
+    <transition name="fade">
+      <div class="reload-animation" v-if="shutDownStatus">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p>Shutting Down</p>
+      </div>
+    </transition>
     <div class="container">
       <div class="folder" v-for="(i, index) in 50" :key="index">
         <i class="fas fa-folder-open"></i> Folder
@@ -95,7 +110,8 @@ export default {
   props: ["menuView"],
   data() {
     return {
-      reloadStatus: false
+      reloadStatus: false,
+      shutDownStatus: false
     }
   },
   methods: {
@@ -110,6 +126,18 @@ export default {
       document.addEventListener("keydown", () => {
         this.$emit("sleep", false);
       });
+    },
+    shutDown() {
+      this.shutDownStatus = true
+      setTimeout(() => {
+        this.$emit("sleep", true);
+        document.addEventListener("keydown", () => {
+          this.$emit("sleep", false);
+        })
+        setTimeout(() => {
+          this.shutDownStatus = false
+        }, 100);
+      }, 4000);
     }
   }
 };
@@ -225,6 +253,7 @@ export default {
   }
 }
 .reload-animation {
+  cursor: none;
   position: fixed;
   top: 0;
   left: 0;
