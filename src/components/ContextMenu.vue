@@ -1,7 +1,7 @@
 <template>
   <ul id="rmenu" class="context-menu" v-click-outside="hide">
     <li>
-      <button @click="reload">Reload</button>
+      <button @click="reload">Refresh</button>
     </li>
     <li>
       <button @click="changeBackgroundShow('changeBackground', 'thisPC', 'Change Background')">Change Background</button>
