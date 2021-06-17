@@ -10,8 +10,6 @@ const changeBackground =  (imageName = 'https://mehmetsagir.com/wallpaper/3.webp
     }))
   }
 
-  console.log(imageName)
-
   const el = document.getElementById('home')
   el.style.background = `url(${imageName})`
   el.style.backgroundPosition = 'center'
