@@ -8,9 +8,14 @@ export default new Vuex.Store({
   state: {
     folders: getFolders(),
   },
+  mutations: {
+    setFolders(state, data) {
+      state.folders = data;
+    },
+  },
   actions: {
-    setFolders(context, folders) {
-      context.state.folders = folders;
+    fetchFolders(context, folders) {
+      context.commit("setFolders", folders);
     },
   },
 });

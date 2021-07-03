@@ -42,8 +42,9 @@ export default {
       this.isActive = false;
       if (path && icon && title) {
         setFolder(title, icon, path);
-        this.$store.state.folders = JSON.parse(
-          localStorage.getItem("windows-folders")
+        this.$store.dispatch(
+          "fetchFolders",
+          JSON.parse(localStorage.getItem("windows-folders"))
         );
       }
     },

@@ -64,16 +64,16 @@ export default {
     closeFolder() {
       if (localStorage.getItem("windows-folders")) {
         closeFolder(this.folderName);
-        this.$store.state.folders = getFolders();
+        this.$store.dispatch("fetchFolders", getFolders());
       }
     },
     updateShowModal() {
       updateShowFolder(this.folderName);
-      this.$store.state.folders = getFolders();
+      this.$store.dispatch("fetchFolders", getFolders());
     },
     fullScreen() {
       updateFullScreen(this.folderName);
-      this.$store.state.folders = getFolders();
+      this.$store.dispatch("fetchFolders", getFolders());
       this.$store.state.folders.map((folder) => {
         if (folder.path === this.folderName)
           this.fullScreenStatus = folder.fullScreen;

@@ -29,7 +29,7 @@ export default {
   methods: {
     updateShowFolder() {
       updateShowFolder(this.folder.path);
-      this.$store.state.folders = getFolders();
+      this.$store.dispatch("fetchFolders", getFolders());
     },
   },
 };
