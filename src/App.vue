@@ -12,7 +12,7 @@ import Home from "./components/Home.vue";
 import ContextMenu from "./components/ContextMenu";
 export default {
   name: "App",
-  components: { ContextMenu, Navigator, Home }
+  components: { ContextMenu, Navigator, Home },
 };
 </script>
 
@@ -59,7 +59,6 @@ iframe {
     flex: 1;
   }
 }
-
 
 button {
   background: none;

@@ -10,6 +10,7 @@
     <AnimateCSS v-if="comp == 'AnimateCSS'" />
     <GithubFinder v-if="comp == 'GithubFinder'" />
     <ChangeBackground v-if="comp == 'changeBackground'" />
+    <LiveCSS v-if="comp == 'LiveCSS'" />
     <CardGame v-if="comp == 'CardGame'" />
   </div>
 </template>
@@ -25,15 +26,29 @@ import VSvgIcons from "./VSvgIcons";
 import AnimateCSS from "./AnimateCSS";
 import GithubFinder from "./GithubFinder";
 import ChangeBackground from "./ChangeBackground";
-import CardGame from './CardGame.vue';
+import CardGame from "./CardGame";
+import LiveCSS from "./LiveCSS";
 export default {
   name: "Folder",
   props: {
     comp: {
       required: true,
-      type: String
-    }
+      type: String,
+    },
   },
-  components: { ChangeBackground, GithubFinder, AnimateCSS, VSvgIcons, TodoApp, Instagram, VueCountriesCities, FastTyping, Chrome, Twitter, CardGame }
+  components: {
+    ChangeBackground,
+    GithubFinder,
+    AnimateCSS,
+    VSvgIcons,
+    TodoApp,
+    Instagram,
+    VueCountriesCities,
+    FastTyping,
+    Chrome,
+    Twitter,
+    CardGame,
+    LiveCSS,
+  },
 };
 </script>

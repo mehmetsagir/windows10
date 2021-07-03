@@ -111,12 +111,12 @@ export default {
   data() {
     return {
       reloadStatus: false,
-      shutDownStatus: false
-    }
+      shutDownStatus: false,
+    };
   },
   methods: {
     reload() {
-      this.reloadStatus = true
+      this.reloadStatus = true;
       setTimeout(() => {
         window.location.reload();
       }, 5000);
@@ -128,18 +128,18 @@ export default {
       });
     },
     shutDown() {
-      this.shutDownStatus = true
+      this.shutDownStatus = true;
       setTimeout(() => {
         this.$emit("sleep", true);
         document.addEventListener("keydown", () => {
           this.$emit("sleep", false);
-        })
+        });
         setTimeout(() => {
-          this.shutDownStatus = false
+          this.shutDownStatus = false;
         }, 100);
       }, 4000);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -277,8 +277,8 @@ export default {
   width: 80px;
   height: 80px;
   div {
-  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  transform-origin: 40px 40px;
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
   }
   div:after {
     content: " ";
@@ -357,11 +357,12 @@ export default {
   }
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
-
 </style>

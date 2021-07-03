@@ -1,8 +1,10 @@
 <template>
-  <button @dblclick="openFolder(path, icon, title)"
-          @click="isActive = true"
-          :class="isActive && 'active'"
-          v-click-outside="notActive">
+  <button
+    @dblclick="openFolder(path, icon, title)"
+    @click="isActive = true"
+    :class="isActive && 'active'"
+    v-click-outside="notActive"
+  >
     <img
       :src="require(`/src/assets/folder-icons/${icon}.svg`)"
       width="35px"
@@ -18,8 +20,8 @@ export default {
   name: "FolderButton",
   data() {
     return {
-      isActive: false
-    }
+      isActive: false,
+    };
   },
   props: {
     icon: {
@@ -32,22 +34,24 @@ export default {
     },
     path: {
       required: true,
-      type: String
-    }
+      type: String,
+    },
   },
   methods: {
     openFolder(path, icon, title) {
-      this.isActive = false
+      this.isActive = false;
       if (path && icon && title) {
-        setFolder(title, icon, path)
-        this.$store.state.folders = JSON.parse(localStorage.getItem('windows-folders'))
+        setFolder(title, icon, path);
+        this.$store.state.folders = JSON.parse(
+          localStorage.getItem("windows-folders")
+        );
       }
     },
     notActive() {
-      this.isActive = false
-    }
+      this.isActive = false;
+    },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

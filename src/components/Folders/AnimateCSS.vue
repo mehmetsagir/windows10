@@ -8,6 +8,6 @@
 import Layout from "../FolderLayout";
 export default {
   name: "AnimateCSS",
-  components: { Layout }
+  components: { Layout },
 };
 </script>

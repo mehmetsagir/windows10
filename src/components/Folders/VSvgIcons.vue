@@ -8,6 +8,6 @@
 import Layout from "../FolderLayout";
 export default {
   name: "VSvgIcons",
-  components: { Layout }
+  components: { Layout },
 };
 </script>

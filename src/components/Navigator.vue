@@ -23,7 +23,12 @@
       <p class="time">{{ time }}</p>
     </div>
     <transition name="fade">
-      <NavigatorMenu @sleep="sleep = $event" v-if="navigationMenuView" :menuView="navigationMenuView" @hideMenu="navigationMenuView = $event" />
+      <NavigatorMenu
+        @sleep="sleep = $event"
+        v-if="navigationMenuView"
+        :menuView="navigationMenuView"
+        @hideMenu="navigationMenuView = $event"
+      />
     </transition>
     <transition name="opacity">
       <div class="shut-down" v-if="sleep"></div>
@@ -46,8 +51,8 @@ export default {
   components: { NavFolder, NavigatorMenu },
   methods: {
     hide() {
-      this.navigationMenuView = false
-    }
+      this.navigationMenuView = false;
+    },
   },
   created() {
     setInterval(() => {
@@ -62,7 +67,7 @@ export default {
           : date.getMinutes();
       this.time = hours + ":" + minutes;
     }, 100);
-  }
+  },
 };
 </script>
 

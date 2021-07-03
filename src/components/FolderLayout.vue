@@ -1,12 +1,18 @@
 <template>
-  <div class="container folder-container" :class="fullScreenStatus ? `fullScreen ${folderName}` : folderName">
+  <div
+    class="container folder-container"
+    :class="fullScreenStatus ? `fullScreen ${folderName}` : folderName"
+  >
     <div class="resizer nw"></div>
     <div class="resizer ne"></div>
     <div class="resizer sw"></div>
     <div class="resizer se"></div>
     <div class="folder-header" @dblclick="fullScreen">
       <div class="info" v-if="folder">
-        <img :src="require(`/src/assets/folder-icons/${folder.icon}.svg`)" :alt="folder.path">
+        <img
+          :src="require(`/src/assets/folder-icons/${folder.icon}.svg`)"
+          :alt="folder.path"
+        />
         <p>{{ folder.title }}</p>
       </div>
       <ul>
@@ -27,58 +33,66 @@
         </li>
       </ul>
     </div>
-    <div class="content" :style="overflow ? 'overflow-y: auto' : 'overflow: hidden'">
+    <div
+      class="content"
+      :style="overflow ? 'overflow-y: auto' : 'overflow: hidden'"
+    >
       <slot />
     </div>
   </div>
 </template>
 
 <script>
-import folderResize from './../assets/js/folderResize'
-import folderDrag from './../assets/js/folderDrag'
-import { getFolders, closeFolder, updateShowFolder, updateFullScreen } from "../assets/js/local";
+import folderResize from "./../assets/js/folderResize";
+import folderDrag from "./../assets/js/folderDrag";
+import {
+  getFolders,
+  closeFolder,
+  updateShowFolder,
+  updateFullScreen,
+} from "../assets/js/local";
 export default {
   name: "FolderLayout",
   data() {
     return {
       fullScreenStatus: false,
-      folder: null
-    }
+      folder: null,
+    };
   },
   props: ["folderName", "overflow"],
   methods: {
     closeFolder() {
-      if (localStorage.getItem('windows-folders')) {
-        closeFolder(this.folderName)
-        this.$store.state.folders = getFolders()
+      if (localStorage.getItem("windows-folders")) {
+        closeFolder(this.folderName);
+        this.$store.state.folders = getFolders();
       }
     },
     updateShowModal() {
-      updateShowFolder(this.folderName)
-      this.$store.state.folders = getFolders()
+      updateShowFolder(this.folderName);
+      this.$store.state.folders = getFolders();
     },
     fullScreen() {
-      updateFullScreen(this.folderName)
-      this.$store.state.folders = getFolders()
-      this.$store.state.folders.map(folder => {
-        if(folder.path === this.folderName) this.fullScreenStatus = folder.fullScreen
-      })
-    }
+      updateFullScreen(this.folderName);
+      this.$store.state.folders = getFolders();
+      this.$store.state.folders.map((folder) => {
+        if (folder.path === this.folderName)
+          this.fullScreenStatus = folder.fullScreen;
+      });
+    },
   },
   created() {
-    this.$store.state.folders.map(folder => {
-      if(folder.path === this.folderName) {
-        this.fullScreenStatus = folder.fullScreen
-        this.folder = folder
+    this.$store.state.folders.map((folder) => {
+      if (folder.path === this.folderName) {
+        this.fullScreenStatus = folder.fullScreen;
+        this.folder = folder;
       }
-    })
+    });
   },
   mounted() {
-    folderResize(this.folderName)
-    folderDrag(this.folderName)
-  }
+    folderResize(this.folderName);
+    folderDrag(this.folderName);
+  },
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -106,7 +120,7 @@ export default {
     align-items: center;
     height: 35px;
     min-height: 35px;
-    border-bottom: 1px solid rgba(#ccc, .4);
+    border-bottom: 1px solid rgba(#ccc, 0.4);
     font-family: sans-serif;
     *::selection {
       background: none;

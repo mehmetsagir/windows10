@@ -6,11 +6,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    folders: getFolders()
+    folders: getFolders(),
   },
   actions: {
     setFolders(context, folders) {
-      context.state.folders = folders
-    }
-  }
+      context.state.folders = folders;
+    },
+  },
 });

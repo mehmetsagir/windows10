@@ -1,13 +1,13 @@
 <template>
-  <Layout folderName="GithubFinder">
-    <iframe src="https://github-finder-ms.netlify.app/"></iframe>
+  <Layout folderName="LiveCSS">
+    <iframe src="https://livecss.vercel.app/"></iframe>
   </Layout>
 </template>
 
 <script>
 import Layout from "../FolderLayout";
 export default {
-  name: "GithubFinder",
+  name: "LiveCSS",
   components: { Layout },
 };
 </script>

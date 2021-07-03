@@ -3,12 +3,17 @@
     <Folder icon="chrome" title="Google Chrome" path="Chrome" />
     <Folder icon="twitter" title="Twitter" path="Twitter" />
     <Folder icon="fastTyping" title="Fast Typing" path="FastTyping" />
-    <Folder icon="vueCountriesCities" title="Vue Countries Cities" path="VueCountriesCities" />
+    <Folder
+      icon="vueCountriesCities"
+      title="Vue Countries Cities"
+      path="VueCountriesCities"
+    />
     <Folder icon="instagram" title="Instagram" path="Instagram" />
     <Folder icon="todoApp" title="Todo App" path="TodoApp" />
     <Folder icon="vSvgIcons" title="Vue Svg Icons" path="VSvgIcons" />
     <Folder icon="animateCSS" title="Animate CSS" path="AnimateCSS" />
     <Folder icon="githubFinder" title="Github Finder" path="GithubFinder" />
+    <Folder icon="liveCSS" title="Live CSS" path="LiveCSS" />
     <Folder icon="cardGame" title="Card Game" path="CardGame" />
   </div>
 </template>

@@ -6,7 +6,11 @@
       :alt="folder.title"
     />
     <p>
-      {{ folder.title.length > 18 ? folder.title.slice(0, 17) + '...' : this.folder.title }}
+      {{
+        folder.title.length > 18
+          ? folder.title.slice(0, 17) + "..."
+          : this.folder.title
+      }}
     </p>
   </div>
 </template>
@@ -19,15 +23,15 @@ export default {
   props: {
     folder: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
   methods: {
     updateShowFolder() {
-      updateShowFolder(this.folder.path)
-      this.$store.state.folders = getFolders()
-    }
-  }
+      updateShowFolder(this.folder.path);
+      this.$store.state.folders = getFolders();
+    },
+  },
 };
 </script>
 
@@ -51,6 +55,5 @@ export default {
   img {
     margin-right: 10px;
   }
-
 }
 </style>
