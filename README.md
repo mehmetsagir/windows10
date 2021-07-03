@@ -1,4 +1,4 @@
-# Vue.js - Twitter Clone
+# Windows UI
 ✨ **Live Demo ->** [Windows UI](https://windows10-ui.vercel.app/)
 
 ## Project setup
