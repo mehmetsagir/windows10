@@ -12,6 +12,7 @@
     <ChangeBackground v-if="comp == 'changeBackground'" />
     <LiveCSS v-if="comp == 'LiveCSS'" />
     <CardGame v-if="comp == 'CardGame'" />
+    <Whatsapp v-if="comp == 'Whatsapp'" />
   </div>
 </template>
 
@@ -28,6 +29,7 @@ import GithubFinder from "./GithubFinder";
 import ChangeBackground from "./ChangeBackground";
 import CardGame from "./CardGame";
 import LiveCSS from "./LiveCSS";
+import Whatsapp from "./Whatsapp";
 export default {
   name: "Folder",
   props: {
@@ -49,6 +51,7 @@ export default {
     Twitter,
     CardGame,
     LiveCSS,
+    Whatsapp,
   },
 };
 </script>

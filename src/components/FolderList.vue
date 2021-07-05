@@ -15,6 +15,7 @@
     <Folder icon="githubFinder" title="Github Finder" path="GithubFinder" />
     <Folder icon="liveCSS" title="Live CSS" path="LiveCSS" />
     <Folder icon="cardGame" title="Card Game" path="CardGame" />
+    <Folder icon="whatsapp" title="Whatsapp" path="Whatsapp" />
   </div>
 </template>
 
