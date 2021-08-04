@@ -40,11 +40,9 @@ export const setFolder = (title, icon, path) => {
 
 export const closeFolder = (folderName) => {
   if (localStorage.getItem("windows-folders")) {
-    const lastFolders = JSON.parse(localStorage.getItem("windows-folders"));
-    const folders = [];
-    lastFolders.map((folder) => {
-      folder.path !== folderName && folders.push(folder);
-    });
+    const folders = JSON.parse(localStorage.getItem("windows-folders")).filter(
+      (folder) => folder.path !== folderName
+    );
     localStorage.setItem("windows-folders", JSON.stringify(folders));
   }
 };

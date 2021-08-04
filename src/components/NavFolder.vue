@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getFolders, updateShowFolder } from "../assets/js/local";
+import { getFolders, updateShowFolder } from "../helpers/local";
 
 export default {
   name: "NavFolder",

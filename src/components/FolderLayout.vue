@@ -43,14 +43,14 @@
 </template>
 
 <script>
-import folderResize from "./../assets/js/folderResize";
-import folderDrag from "./../assets/js/folderDrag";
+import folderResize from "../helpers/folderResize";
+import folderDrag from "../helpers/folderDrag";
 import {
   getFolders,
   closeFolder,
   updateShowFolder,
   updateFullScreen,
-} from "../assets/js/local";
+} from "../helpers/local";
 export default {
   name: "FolderLayout",
   data() {
@@ -99,14 +99,14 @@ export default {
 .container {
   min-width: 400px;
   min-height: 300px;
-  width: 50%;
+  width: 60%;
   height: 50%;
   display: flex;
   flex-direction: column;
   background: #fafafa;
   position: absolute;
   top: 25%;
-  left: 25%;
+  left: 15%;
 
   &.fullScreen {
     width: 100% !important;

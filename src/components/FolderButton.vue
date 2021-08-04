@@ -2,7 +2,7 @@
   <button
     @dblclick="openFolder(path, icon, title)"
     @click="isActive = true"
-    :class="isActive && 'active'"
+    :class="{ active: isActive }"
     v-click-outside="notActive"
   >
     <img
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { setFolder } from "../assets/js/local";
+import { setFolder } from "../helpers/local";
 export default {
   name: "FolderButton",
   data() {

@@ -14,7 +14,7 @@
 <script>
 import FolderList from "./FolderList.vue";
 import Folder from "./Folders";
-import changeBackground from "../assets/js/changeBackground";
+import changeBackground from "../helpers/changeBackground";
 export default {
   name: "Home",
   components: { Folder, FolderList },

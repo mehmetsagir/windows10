@@ -13,6 +13,12 @@ import ContextMenu from "./components/ContextMenu";
 export default {
   name: "App",
   components: { ContextMenu, Navigator, Home },
+  created() {
+    if (localStorage.getItem("windows-settings")) {
+      const settings = JSON.parse(localStorage.getItem("windows-settings"));
+      this.$store.dispatch("updateFolderSortType", settings.folderSortType);
+    }
+  },
 };
 </script>
 

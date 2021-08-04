@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import background from "../../assets/js/changeBackground";
+import background from "../../helpers/changeBackground";
 import Layout from "../FolderLayout";
 export default {
   name: "ChangeBackground",
