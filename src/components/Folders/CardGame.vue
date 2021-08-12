@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Layout from "../FolderLayout.vue";
+import Layout from "../Layouts/FolderLayout.vue";
 export default {
   components: { Layout },
   name: "CardGame",

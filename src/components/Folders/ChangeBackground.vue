@@ -27,7 +27,7 @@
 
 <script>
 import background from "../../helpers/changeBackground";
-import Layout from "../FolderLayout";
+import Layout from "../Layouts/FolderLayout";
 export default {
   name: "ChangeBackground",
   components: { Layout },

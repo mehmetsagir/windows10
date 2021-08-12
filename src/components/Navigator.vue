@@ -82,7 +82,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  overflow: hidden;
   &-bar {
     height: 100%;
     display: flex;
@@ -113,16 +112,14 @@ export default {
     height: 100%;
     display: flex;
     padding-right: 20px;
-    i {
-      font-size: 14px;
-    }
+    font-size: 14px;
     & > * {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100%;
       cursor: default;
-      padding: 0 7px;
+      padding: 0 5px;
       transition: 150ms;
       &:hover {
         background: lighten(#ddd, 7%);

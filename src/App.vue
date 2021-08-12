@@ -35,6 +35,7 @@ html,
 body {
   background: black;
   max-height: 100vh;
+  max-width: 100vw;
   overflow: hidden;
 }
 

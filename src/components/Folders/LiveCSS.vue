@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Layout from "../FolderLayout";
+import Layout from "../Layouts/FolderLayout";
 export default {
   name: "LiveCSS",
   components: { Layout },
