@@ -1,5 +1,5 @@
 <template>
-  <div class="folder-wrapper">
+  <div class="folder-wrapper" v-if="$store.state.showDesktopIcons">
     <div v-for="(folder, key) in this.$store.state.folderList" :key="key">
       <Folder :icon="folder.icon" :title="folder.title" :path="folder.path" />
     </div>

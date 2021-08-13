@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { getFolders } from "../helpers/local";
 import FolderList from "../database/folders.json";
+import { getShowFolders, setShowFolders } from "../helpers/showFolders";
 
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ export default new Vuex.Store({
     folders: getFolders(),
     folderSortType: null,
     folderList: FolderList,
+    showDesktopIcons: getShowFolders(),
   },
   mutations: {
     setFolders(state, data) {
@@ -44,5 +46,12 @@ export default new Vuex.Store({
     updateFolderSortType(context, type) {
       context.commit("setFolderSortType", type);
     },
+    getShowFolders(context) {
+      context.state.showDesktopIcons = getShowFolders();
+    },
+    setShowFolders(context, value) {
+      setShowFolders(value);
+      context.dispatch("getShowFolders");
+    }
   },
 });

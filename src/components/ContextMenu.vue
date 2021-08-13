@@ -2,6 +2,32 @@
   <ul id="rmenu" class="context-menu" v-click-outside="hide">
     <li>
       <button>
+        View
+        <svg width="10" viewBox="0 0 256 512">
+          <path
+            fill="#ccc"
+            d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+          ></path>
+        </svg>
+      </button>
+      <ul class="sub">
+        <li
+          v-for="size in folderSizes"
+          :class="size === folderSize && 'selected'"
+          :key="size"
+        >
+          <button @click="folderSize = size">{{ size }} icons</button>
+        </li>
+        <li
+          class="border-top"
+          :class="$store.state.showDesktopIcons && 'selected'"
+        >
+          <button @click="showDesktopIcons">Show desktop icons</button>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <button>
         Sort By
         <svg width="10" viewBox="0 0 256 512">
           <path
@@ -47,6 +73,8 @@ export default {
     return {
       sortType: null,
       sortTypes: ["Name", "Size"],
+      folderSize: null,
+      folderSizes: ["Large", "Medium", "Small"],
     };
   },
   methods: {
@@ -80,6 +108,12 @@ export default {
         };
         localStorage.setItem(JSON.stringify("windows-settings", settings));
       }
+    },
+    showDesktopIcons() {
+      this.$store.dispatch(
+        "setShowFolders",
+        !this.$store.state.showDesktopIcons
+      );
     },
   },
   watch: {
@@ -164,6 +198,11 @@ export default {
             border-radius: 50%;
             background: black;
           }
+        }
+        &.border-top {
+          margin-top: 3px;
+          padding-top: 3px;
+          border-top: 1px solid rgba(0, 0, 0, 0.2) !important;
         }
       }
     }
