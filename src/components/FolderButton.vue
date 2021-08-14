@@ -2,7 +2,7 @@
   <button
     @dblclick="openFolder(path, icon, title)"
     @click="isActive = true"
-    :class="$store.state.folderSize.shortName"
+    :class="`${$store.state.folderSize.shortName} ${isActive && 'active'}`"
     v-click-outside="notActive"
   >
     <img
