@@ -3,15 +3,35 @@ import Vuex from "vuex";
 import { getFolders } from "../helpers/local";
 import FolderList from "../database/folders.json";
 import { getShowFolders, setShowFolders } from "../helpers/showFolders";
+import { getFolderSize, setFolderSize } from "../helpers/folderSize";
+import { getFolderSort, setFolderSort } from "../helpers/folderSort";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     folders: getFolders(),
-    folderSortType: null,
+    folderSortType: getFolderSort(),
     folderList: FolderList,
     showDesktopIcons: getShowFolders(),
+    folderSize: getFolderSize(),
+    folderSizeList: [
+      {
+        name: "Large",
+        shortName: "lg",
+        size: "45px",
+      },
+      {
+        name: "Medium",
+        shortName: "md",
+        size: "35px",
+      },
+      {
+        name: "Small",
+        shortName: "sm",
+        size: "25px",
+      },
+    ],
   },
   mutations: {
     setFolders(state, data) {
@@ -43,15 +63,18 @@ export default new Vuex.Store({
     fetchFolders(context, folders) {
       context.commit("setFolders", folders);
     },
-    updateFolderSortType(context, type) {
+    setFolderSort(context, type) {
+      setFolderSort(type);
       context.commit("setFolderSortType", type);
-    },
-    getShowFolders(context) {
-      context.state.showDesktopIcons = getShowFolders();
+      context.state.folderSortType = getFolderSort();
     },
     setShowFolders(context, value) {
       setShowFolders(value);
-      context.dispatch("getShowFolders");
-    }
+      context.state.showDesktopIcons = getShowFolders();
+    },
+    setFoldersSize(context, value) {
+      setFolderSize(value);
+      context.state.folderSize = getFolderSize();
+    },
   },
 });

@@ -2,12 +2,12 @@
   <button
     @dblclick="openFolder(path, icon, title)"
     @click="isActive = true"
-    :class="{ active: isActive }"
+    :class="$store.state.folderSize.shortName"
     v-click-outside="notActive"
   >
     <img
       :src="require(`/src/assets/folder-icons/${icon}.svg`)"
-      width="35px"
+      :width="$store.state.folderSize.size"
       :alt="title"
     />
     <p>{{ title }}</p>
@@ -58,15 +58,25 @@ export default {
 <style lang="scss" scoped>
 button {
   max-width: 100px;
-  min-height: 85px;
-  width: 85px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  &.md {
+    width: 85px;
+    min-height: 85px;
+  }
+  &.lg {
+    width: 95px;
+    min-height: 95px;
+  }
+  &.sm {
+    width: 85px;
+    min-height: 75px;
+  }
   &.active {
     background: rgba(#0080ff, 0.3);
     border: 1px solid rgba(#0080ff, 0.8);

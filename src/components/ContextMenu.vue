@@ -12,11 +12,14 @@
       </button>
       <ul class="sub">
         <li
-          v-for="size in folderSizes"
-          :class="size === folderSize && 'selected'"
-          :key="size"
+          v-for="item in $store.state.folderSizeList"
+          :class="item.size === $store.state.folderSize.size && 'selected'"
+          :key="item.shortName"
+          @click="setFolderSize(item)"
         >
-          <button @click="folderSize = size">{{ size }} icons</button>
+          <button @click="folderSize = item.shortName">
+            {{ item.name }} icons
+          </button>
         </li>
         <li
           class="border-top"
@@ -38,11 +41,11 @@
       </button>
       <ul class="sub">
         <li
-          :class="item === sortType && 'selected'"
           v-for="item in sortTypes"
+          :class="item === $store.state.folderSortType && 'selected'"
           :key="item"
         >
-          <button @click="sortType = item">{{ item }}</button>
+          <button @click="folderSort(item)">{{ item }}</button>
         </li>
       </ul>
     </li>
@@ -71,10 +74,7 @@ export default {
   name: "ContextMenu",
   data() {
     return {
-      sortType: null,
       sortTypes: ["Name", "Size"],
-      folderSize: null,
-      folderSizes: ["Large", "Medium", "Small"],
     };
   },
   methods: {
@@ -94,20 +94,8 @@ export default {
       }
       this.hide();
     },
-    folderSort() {
-      if (this.sortType === null) return null;
-
-      this.$store.dispatch("updateFolderSortType", this.sortType);
-      if (localStorage.getItem("windows-settings")) {
-        const settings = JSON.parse(localStorage.getItem("windows-settings"));
-        settings.folderSortType = this.sortType;
-        localStorage.setItem("windows-settings", JSON.stringify(settings));
-      } else {
-        const settings = {
-          folderSortType: this.sortType,
-        };
-        localStorage.setItem(JSON.stringify("windows-settings", settings));
-      }
+    folderSort(value) {
+      this.$store.dispatch("setFolderSort", value);
     },
     showDesktopIcons() {
       this.$store.dispatch(
@@ -115,10 +103,8 @@ export default {
         !this.$store.state.showDesktopIcons
       );
     },
-  },
-  watch: {
-    sortType() {
-      this.folderSort();
+    setFolderSize(size) {
+      this.$store.dispatch("setFoldersSize", size);
     },
   },
   created() {

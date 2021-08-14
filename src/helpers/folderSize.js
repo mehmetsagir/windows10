@@ -1,35 +1,46 @@
-export const setShowFolders = (value) => {
+const defaultValue = {
+  name: "Medium",
+  shortName: "md",
+  size: "35px",
+};
+
+export const setFolderSize = (value) => {
+  if (!value) return null;
   if (localStorage.getItem("windows-settings")) {
     const settings = JSON.parse(localStorage.getItem("windows-settings"));
-    settings.showFolders = value;
+    settings.folderSize = value;
     localStorage.setItem("windows-settings", JSON.stringify(settings));
   } else {
     localStorage.setItem(
       "windows-settings",
       JSON.stringify({
-        showFolders: value,
+        folderSize: value,
       })
     );
   }
 };
 
-export const getShowFolders = () => {
+export const getFolderSize = () => {
   if (localStorage.getItem("windows-settings")) {
     const settings = JSON.parse(localStorage.getItem("windows-settings"));
-    if (settings.showFolders || settings.showFolders === false) {
-      return settings.showFolders;
+    if (settings.folderSize) {
+      return settings.folderSize;
     } else {
-      settings.showFolders = true;
-      localStorage.setItem("windows-settings", JSON.stringify(settings));
-      return true;
+      localStorage.setItem(
+        "windows-settings",
+        JSON.stringify({
+          folderSize: defaultValue,
+        })
+      );
+      return defaultValue;
     }
   } else {
     localStorage.setItem(
       "windows-settings",
       JSON.stringify({
-        showFolders: true,
+        folderSize: defaultValue,
       })
     );
-    return true;
+    return defaultValue;
   }
 };

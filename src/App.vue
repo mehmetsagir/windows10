@@ -16,7 +16,7 @@ export default {
   created() {
     if (localStorage.getItem("windows-settings")) {
       const settings = JSON.parse(localStorage.getItem("windows-settings"));
-      this.$store.dispatch("updateFolderSortType", settings.folderSortType);
+      this.$store.dispatch("setFolderSort", settings.folderSortType);
     }
   },
 };
