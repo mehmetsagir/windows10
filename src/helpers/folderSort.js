@@ -1,37 +1,33 @@
+import { getLocal, setLocal } from "./local";
+
 export const setFolderSort = (sortType) => {
-  if (localStorage.getItem("windows-settings")) {
-    const settings = JSON.parse(localStorage.getItem("windows-settings"));
+  if (getLocal("windows-settings")) {
+    const settings = getLocal("windows-settings");
     settings.folderSortType = sortType;
-    localStorage.setItem("windows-settings", JSON.stringify(settings));
+    setLocal("windows-settings", settings);
   } else {
     const settings = {
       folderSortType: sortType,
     };
-    localStorage.setItem(JSON.stringify("windows-settings", settings));
+    setLocal("windows-settings", settings);
   }
 };
 
 export const getFolderSort = () => {
-  if (localStorage.getItem("windows-settings")) {
-    const settings = JSON.parse(localStorage.getItem("windows-settings"));
+  if (getLocal("windows-settings")) {
+    const settings = getLocal("windows-settings");
     if (settings.folderSortType) {
       return settings.folderSortType;
     } else {
-      localStorage.setItem(
-        "windows-settings",
-        JSON.stringify({
-          folderSortType: "Size",
-        })
-      );
+      setLocal("windows-settings", {
+        folderSortType: "Size",
+      });
       return "Size";
     }
   } else {
-    localStorage.setItem(
-      "windows-settings",
-      JSON.stringify({
-        folderSortType: "Size",
-      })
-    );
+    setLocal("windows-settings", {
+      folderSortType: "Size",
+    });
     return "Size";
   }
 };

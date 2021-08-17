@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { getFolders } from "../helpers/local";
+import { getFolders } from "../helpers/folders";
 import FolderList from "../database/folders.json";
 import { getShowFolders, setShowFolders } from "../helpers/showFolders";
 import { getFolderSize, setFolderSize } from "../helpers/folderSize";

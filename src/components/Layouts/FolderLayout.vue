@@ -98,7 +98,8 @@ import {
   closeFolder,
   updateShowFolder,
   updateFullScreen,
-} from "../../helpers/local";
+} from "../../helpers/folders";
+import { getLocal } from "../../helpers/local";
 export default {
   name: "FolderLayout",
   data() {
@@ -123,7 +124,7 @@ export default {
   },
   methods: {
     closeFolder() {
-      if (localStorage.getItem("windows-folders")) {
+      if (getLocal("windows-folders")) {
         closeFolder(this.folderName);
         this.$store.dispatch("fetchFolders", getFolders());
       }

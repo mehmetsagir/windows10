@@ -15,7 +15,8 @@
 </template>
 
 <script>
-import { setFolder } from "../helpers/local";
+import { setFolder } from "../helpers/folders";
+import { getLocal } from "../helpers/local";
 export default {
   name: "FolderButton",
   data() {
@@ -42,10 +43,7 @@ export default {
       this.isActive = false;
       if (path && icon && title) {
         setFolder(title, icon, path);
-        this.$store.dispatch(
-          "fetchFolders",
-          JSON.parse(localStorage.getItem("windows-folders"))
-        );
+        this.$store.dispatch("fetchFolders", getLocal("windows-folders"));
       }
     },
     notActive() {

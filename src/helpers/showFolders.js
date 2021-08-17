@@ -1,35 +1,31 @@
+import { getLocal, setLocal } from "./local";
+
 export const setShowFolders = (value) => {
-  if (localStorage.getItem("windows-settings")) {
-    const settings = JSON.parse(localStorage.getItem("windows-settings"));
+  if (getLocal("windows-settings")) {
+    const settings = getLocal("windows-settings");
     settings.showFolders = value;
-    localStorage.setItem("windows-settings", JSON.stringify(settings));
+    setLocal("windows-settings", settings);
   } else {
-    localStorage.setItem(
-      "windows-settings",
-      JSON.stringify({
-        showFolders: value,
-      })
-    );
+    setLocal("windows-settings", {
+      showFolders: value,
+    });
   }
 };
 
 export const getShowFolders = () => {
-  if (localStorage.getItem("windows-settings")) {
-    const settings = JSON.parse(localStorage.getItem("windows-settings"));
+  if (getLocal("windows-settings")) {
+    const settings = getLocal("windows-settings");
     if (settings.showFolders || settings.showFolders === false) {
       return settings.showFolders;
     } else {
       settings.showFolders = true;
-      localStorage.setItem("windows-settings", JSON.stringify(settings));
+      setLocal("windows-settings", settings);
       return true;
     }
   } else {
-    localStorage.setItem(
-      "windows-settings",
-      JSON.stringify({
-        showFolders: true,
-      })
-    );
+    setLocal("windows-settings", {
+      showFolders: true,
+    });
     return true;
   }
 };

@@ -69,7 +69,8 @@
 </template>
 
 <script>
-import { setFolder } from "../helpers/local";
+import { setFolder } from "../helpers/folders";
+import { getLocal } from "../helpers/local";
 export default {
   name: "ContextMenu",
   data() {
@@ -87,10 +88,7 @@ export default {
     changeBackgroundShow(path, icon, title) {
       if (path && icon && title) {
         setFolder(title, icon, path);
-        this.$store.dispatch(
-          "fetchFolders",
-          JSON.parse(localStorage.getItem("windows-folders"))
-        );
+        this.$store.dispatch("fetchFolders", getLocal("windows-folders"));
       }
       this.hide();
     },
@@ -106,12 +104,6 @@ export default {
     setFolderSize(size) {
       this.$store.dispatch("setFoldersSize", size);
     },
-  },
-  created() {
-    if (localStorage.getItem("windows-settings")) {
-      const settings = JSON.parse(localStorage.getItem("windows-settings"));
-      this.sortType = settings.folderSortType;
-    }
   },
 };
 </script>

@@ -1,3 +1,5 @@
+import { getLocal, setLocal } from "./local";
+
 const defaultValue = {
   name: "Medium",
   shortName: "md",
@@ -6,41 +8,30 @@ const defaultValue = {
 
 export const setFolderSize = (value) => {
   if (!value) return null;
-  if (localStorage.getItem("windows-settings")) {
-    const settings = JSON.parse(localStorage.getItem("windows-settings"));
+  if (getLocal("windows-settings")) {
+    const settings = getLocal("windows-settings");
     settings.folderSize = value;
-    localStorage.setItem("windows-settings", JSON.stringify(settings));
+    setLocal("windows-settings", settings);
   } else {
-    localStorage.setItem(
-      "windows-settings",
-      JSON.stringify({
-        folderSize: value,
-      })
-    );
+    setLocal("windows-settings", {
+      folderSize: value,
+    });
   }
 };
 
 export const getFolderSize = () => {
-  if (localStorage.getItem("windows-settings")) {
-    const settings = JSON.parse(localStorage.getItem("windows-settings"));
+  if (getLocal("windows-settings")) {
+    const settings = getLocal("windows-settings");
     if (settings.folderSize) {
       return settings.folderSize;
     } else {
-      localStorage.setItem(
-        "windows-settings",
-        JSON.stringify({
-          folderSize: defaultValue,
-        })
-      );
+      settings.folderSize = defaultValue;
+      setLocal("windows-settings", settings);
       return defaultValue;
     }
-  } else {
-    localStorage.setItem(
-      "windows-settings",
-      JSON.stringify({
-        folderSize: defaultValue,
-      })
-    );
-    return defaultValue;
   }
+  setLocal("windows-settings", {
+    folderSize: defaultValue,
+  });
+  return defaultValue;
 };

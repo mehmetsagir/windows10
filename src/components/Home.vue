@@ -15,12 +15,13 @@
 import FolderList from "./FolderList.vue";
 import Folder from "./Folders";
 import changeBackground from "../helpers/changeBackground";
+import { getLocal } from "../helpers/local";
 export default {
   name: "Home",
   components: { Folder, FolderList },
   mounted() {
-    if (localStorage.getItem("windows-settings")) {
-      const settings = JSON.parse(localStorage.getItem("windows-settings"));
+    if (getLocal("windows-settings")) {
+      const settings = getLocal("windows-settings");
       changeBackground(settings.background);
     } else {
       changeBackground();

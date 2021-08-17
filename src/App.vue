@@ -10,14 +10,15 @@
 import Navigator from "./components/Navigator";
 import Home from "./components/Home.vue";
 import ContextMenu from "./components/ContextMenu";
+import { getLocal } from "./helpers/local";
 export default {
   name: "App",
   components: { ContextMenu, Navigator, Home },
   created() {
-    if (localStorage.getItem("windows-settings")) {
-      const settings = JSON.parse(localStorage.getItem("windows-settings"));
-      this.$store.dispatch("setFolderSort", settings.folderSortType);
-    }
+    this.$store.dispatch(
+      "setFolderSort",
+      getLocal("windows-settings").folderSortType
+    ); // HATALI
   },
 };
 </script>

@@ -1,17 +1,16 @@
+import { getLocal, setLocal } from "./local";
+
 const changeBackground = (
   imageName = "https://mehmetsagir.com/wallpaper/3.webp"
 ) => {
-  if (localStorage.getItem("windows-settings")) {
-    const settings = JSON.parse(localStorage.getItem("windows-settings"));
+  if (getLocal("windows-settings")) {
+    const settings = getLocal("windows-settings");
     settings.background = imageName;
-    localStorage.setItem("windows-settings", JSON.stringify(settings));
+    setLocal("windows-settings", settings);
   } else {
-    localStorage.setItem(
-      "windows-settings",
-      JSON.stringify({
-        background: imageName,
-      })
-    );
+    setLocal("windows-settings", {
+      background: imageName,
+    });
   }
 
   const el = document.getElementById("home");
