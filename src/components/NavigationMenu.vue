@@ -1,5 +1,5 @@
 <template>
-  <div class="navigator-menu">
+  <div class="navigation-menu">
     <div class="left-bar">
       <button>
         <i class="fas fa-grip-lines"></i>
@@ -66,57 +66,39 @@
         </button>
       </div>
     </div>
-    <transition name="fade">
-      <div class="reload-animation" v-if="reloadStatus">
-        <div class="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p>Restarting</p>
-      </div>
-    </transition>
-    <transition name="fade">
-      <div class="reload-animation" v-if="shutDownStatus">
-        <div class="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p>Shutting Down</p>
-      </div>
-    </transition>
     <div class="container">
-      <div class="folder" v-for="(i, index) in 50" :key="index">
-        <i class="fas fa-folder-open"></i> Folder
+      <div
+        class="folder"
+        v-for="folder in folderList"
+        :key="folder.id"
+        @click="openFolder(folder.path, folder.icon, folder.title)"
+      >
+        <img
+          :src="require(`/src/assets/folder-icons/${folder.icon}.svg`)"
+          width="20"
+          :alt="folder.title"
+        />
+        {{ folder.title }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import folderDB from "@/database/folders.json";
+import { setFolder } from "../helpers/folders";
+import { getLocal } from "../helpers/local";
 export default {
-  name: "NavigatorMenu",
+  name: "NavigationMenu",
   props: ["menuView"],
   data() {
     return {
-      reloadStatus: false,
-      shutDownStatus: false,
+      folderList: folderDB,
     };
   },
   methods: {
     reload() {
-      this.reloadStatus = true;
+      this.$emit("reloadStatus", true);
       setTimeout(() => {
         window.location.reload();
       }, 5000);
@@ -128,23 +110,55 @@ export default {
       });
     },
     shutDown() {
-      this.shutDownStatus = true;
+      this.$emit("shutDownStatus", true);
       setTimeout(() => {
         this.$emit("sleep", true);
         document.addEventListener("keydown", () => {
           this.$emit("sleep", false);
         });
         setTimeout(() => {
-          this.shutDownStatus = false;
+          this.$emit("shutDownStatus", false);
         }, 100);
       }, 4000);
+    },
+    openFolder(path, icon, title) {
+      this.isActive = false;
+      if (path && icon && title) {
+        setFolder(title, icon, path);
+        this.$store.dispatch("fetchFolders", getLocal("windows-folders"));
+        this.$emit("hideMenu", false);
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.navigator-menu {
+html.dark {
+  .navigation-menu {
+    background: rgba(#111, 0.9);
+    color: #e9e9e9;
+
+    .container .folder:hover {
+      background: linear-gradient(to left, rgba(#333, 0.5), transparent);
+    }
+
+    .left-bar {
+      background: #111;
+      * {
+        color: #e9e9e9;
+      }
+      button:hover {
+        background: #333;
+      }
+    }
+
+    .open-btn .open-btn-modal {
+      background: #222;
+    }
+  }
+}
+.navigation-menu {
   position: absolute;
   left: 0;
   bottom: 30px;
@@ -153,7 +167,7 @@ export default {
   background: rgba(#ddd, 0.9);
   display: flex;
   z-index: 99;
-
+  backdrop-filter: blur(2px);
   .left-bar {
     height: 100%;
     width: 50px;
@@ -162,6 +176,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     background: #ddd;
+
     &:hover {
       position: absolute;
       width: 230px;
@@ -209,17 +224,6 @@ export default {
     overflow: auto;
     padding: 10px 0;
 
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: black;
-      border-radius: 99px;
-      display: none;
-    }
-    &:hover::-webkit-scrollbar-thumb {
-      display: block;
-    }
     .folder {
       height: 45px;
       display: flex;
@@ -227,12 +231,10 @@ export default {
       padding: 0 15px;
       cursor: pointer;
       &:hover {
-        background: lighten(#ddd, 1%);
+        background: linear-gradient(to left, rgba(#fff, 0.5), transparent);
       }
-      i {
-        font-size: 20px;
+      img {
         margin-right: 10px;
-        color: orange;
       }
     }
   }
@@ -251,118 +253,5 @@ export default {
       width: 100%;
     }
   }
-}
-.reload-animation {
-  cursor: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  p {
-    font-size: 22px;
-    margin-top: 10px;
-    font-weight: 500;
-    color: #ddd;
-  }
-  background: rgb(62, 62, 189);
-}
-.lds-roller {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-  div {
-    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    transform-origin: 40px 40px;
-  }
-  div:after {
-    content: " ";
-    display: block;
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #fff;
-    margin: -4px 0 0 -4px;
-  }
-  div:nth-child(1) {
-    animation-delay: -0.036s;
-  }
-  div:nth-child(1):after {
-    top: 63px;
-    left: 63px;
-  }
-  div:nth-child(2) {
-    animation-delay: -0.072s;
-  }
-  div:nth-child(2):after {
-    top: 68px;
-    left: 56px;
-  }
-  div:nth-child(3) {
-    animation-delay: -0.108s;
-  }
-  div:nth-child(3):after {
-    top: 71px;
-    left: 48px;
-  }
-  div:nth-child(4) {
-    animation-delay: -0.144s;
-  }
-  div:nth-child(4):after {
-    top: 72px;
-    left: 40px;
-  }
-  div:nth-child(5) {
-    animation-delay: -0.18s;
-  }
-  div:nth-child(5):after {
-    top: 71px;
-    left: 32px;
-  }
-  div:nth-child(6) {
-    animation-delay: -0.216s;
-  }
-  div:nth-child(6):after {
-    top: 68px;
-    left: 24px;
-  }
-  div:nth-child(7) {
-    animation-delay: -0.252s;
-  }
-  div:nth-child(7):after {
-    top: 63px;
-    left: 17px;
-  }
-  div:nth-child(8) {
-    animation-delay: -0.288s;
-  }
-  div:nth-child(8):after {
-    top: 56px;
-    left: 12px;
-  }
-}
-
-@keyframes lds-roller {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

@@ -1,15 +1,19 @@
 <template>
   <div v-click-outside="hide">
-    <div class="navigator">
-      <div class="navigator-bar">
+    <div class="navigation">
+      <div class="navigation-bar">
         <button
-          class="navigator-button"
+          class="navigation-button"
           @click="navigationMenuView = !navigationMenuView"
         >
           <i class="fab fa-windows"></i>
         </button>
         <div v-if="$store.state.folders" class="folders">
-          <div v-for="(folder, key) in $store.state.folders" :key="key">
+          <div
+            v-for="(folder, key) in $store.state.folders"
+            :key="key"
+            class="folder"
+          >
             <NavFolder :folder="folder" />
           </div>
         </div>
@@ -54,8 +58,10 @@
         </li>
       </ul>
       <transition name="fade">
-        <NavigatorMenu
+        <NavigationMenu
           @sleep="sleep = $event"
+          @reloadStatus="reloadStatus = $event"
+          @shutDownStatus="shutDownStatus = $event"
           v-if="navigationMenuView"
           :menuView="navigationMenuView"
           @hideMenu="navigationMenuView = $event"
@@ -63,6 +69,36 @@
       </transition>
       <transition name="opacity">
         <div class="shut-down" v-if="sleep"></div>
+      </transition>
+      <transition name="fade" v-if="reloadStatus">
+        <div class="reload-animation">
+          <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <p>Restarting</p>
+        </div>
+      </transition>
+      <transition name="fade" v-if="shutDownStatus">
+        <div class="reload-animation">
+          <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <p>Shutting Down</p>
+        </div>
       </transition>
     </div>
     <transition name="fade-calendar">
@@ -73,6 +109,7 @@
           :attributes="attrs"
           title-position="left"
           is-expanded
+          is-dark
         />
       </div>
     </transition>
@@ -97,16 +134,18 @@
 </template>
 
 <script>
-import NavigatorMenu from "./NavigatorMenu.vue";
+import NavigationMenu from "./NavigationMenu";
 import NavFolder from "./NavFolder";
 export default {
-  name: "Navigator",
+  name: "Navigation",
   data() {
     return {
       time: null,
       timeSecond: null,
       navigationMenuView: false,
       sleep: false,
+      reloadStatus: false,
+      shutDownStatus: false,
       battery: {
         level: null,
         charging: false,
@@ -126,7 +165,7 @@ export default {
       },
     };
   },
-  components: { NavFolder, NavigatorMenu },
+  components: { NavFolder, NavigationMenu },
   methods: {
     hide() {
       this.navigationMenuView = false;
@@ -176,7 +215,54 @@ export default {
 *::selection {
   background: none;
 }
-.navigator {
+html.dark {
+  .calendar {
+    background: #111;
+    border-color: rgba(#333, 0.5);
+
+    .time {
+      border-bottom-color: rgba(#333, 0.5);
+      color: #e9e9e9;
+    }
+  }
+
+  .volumeModal {
+    background: #111;
+    color: #e9e9e9;
+    h5:hover {
+      background: #222;
+    }
+  }
+
+  .navigation {
+    background: #111;
+
+    &-bar {
+      .navigation-button {
+        i {
+          color: #e9e9e9;
+        }
+        &:hover i {
+          color: #00a2ed;
+        }
+      }
+    }
+    .detail {
+      & > * {
+        color: #e9e9e9;
+        &:hover,
+        &.active {
+          background: lighten(#333, 7%);
+        }
+      }
+      li.battery p {
+        background: #333;
+        color: #e9e9e9;
+      }
+    }
+  }
+}
+.navigation {
   position: relative;
   max-width: 100vw;
   height: 30px;
@@ -188,7 +274,7 @@ export default {
   &-bar {
     height: 100%;
     display: flex;
-    .navigator-button {
+    .navigation-button {
       height: 100%;
       padding: 0 10px;
       display: flex;
@@ -229,38 +315,44 @@ export default {
         background: lighten(#ddd, 7%);
       }
     }
-    li.battery {
-      position: relative;
-      &:hover p {
-        visibility: visible;
-        opacity: 1;
+    li {
+      &:not(:last-child) {
+        margin-right: 4px;
       }
-      p {
-        position: absolute;
-        top: -70%;
-        left: -60%;
-        min-width: 150px;
-        padding: 4px 5px;
-        background: #ddd;
-        border: 1px solid rgba(black, 0.4);
-        font-size: 12px;
-        text-align: center;
-        visibility: hidden;
-        opacity: 0;
-        transition: all 250ms;
-        &.remaining {
-          min-width: 108px;
+      &.battery {
+        position: relative;
+        &:hover p {
+          visibility: visible;
+          opacity: 1;
         }
-        &.full {
-          min-width: 130px;
+        p {
+          position: absolute;
+          top: -70%;
+          left: -60%;
+          min-width: 150px;
+          padding: 4px 5px;
+          background: #ddd;
+          border: 1px solid rgba(black, 0.4);
+          font-size: 12px;
+          text-align: center;
+          visibility: hidden;
+          opacity: 0;
+          transition: all 250ms;
+          &.remaining {
+            min-width: 108px;
+          }
+          &.full {
+            min-width: 130px;
+          }
         }
       }
-    }
-    li.volume {
-      width: 22px;
+      &.volume {
+        width: 22px;
+      }
     }
   }
 }
+
 .calendar {
   position: absolute;
   bottom: 30px;
@@ -361,6 +453,113 @@ export default {
   left: 0;
   z-index: 9999;
   cursor: none;
+}
+
+.reload-animation {
+  cursor: none;
+  position: fixed;
+  min-width: 100vw;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgb(62, 62, 189);
+  z-index: 999;
+  p {
+    font-size: 22px;
+    margin-top: 10px;
+    font-weight: 500;
+    color: #ddd;
+  }
+}
+
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
+  }
+  div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    margin: -4px 0 0 -4px;
+  }
+  div:nth-child(1) {
+    animation-delay: -0.036s;
+  }
+  div:nth-child(1):after {
+    top: 63px;
+    left: 63px;
+  }
+  div:nth-child(2) {
+    animation-delay: -0.072s;
+  }
+  div:nth-child(2):after {
+    top: 68px;
+    left: 56px;
+  }
+  div:nth-child(3) {
+    animation-delay: -0.108s;
+  }
+  div:nth-child(3):after {
+    top: 71px;
+    left: 48px;
+  }
+  div:nth-child(4) {
+    animation-delay: -0.144s;
+  }
+  div:nth-child(4):after {
+    top: 72px;
+    left: 40px;
+  }
+  div:nth-child(5) {
+    animation-delay: -0.18s;
+  }
+  div:nth-child(5):after {
+    top: 71px;
+    left: 32px;
+  }
+  div:nth-child(6) {
+    animation-delay: -0.216s;
+  }
+  div:nth-child(6):after {
+    top: 68px;
+    left: 24px;
+  }
+  div:nth-child(7) {
+    animation-delay: -0.252s;
+  }
+  div:nth-child(7):after {
+    top: 63px;
+    left: 17px;
+  }
+  div:nth-child(8) {
+    animation-delay: -0.288s;
+  }
+  div:nth-child(8):after {
+    top: 56px;
+    left: 12px;
+  }
+}
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .fade-enter-active,

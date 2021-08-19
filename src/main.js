@@ -4,7 +4,7 @@ import store from "./store";
 import wb from "./registerServiceWorker";
 import ClickOutside from "vue-click-outside";
 import VCalendar from "v-calendar";
-import "./registerServiceWorker";
+import("./registerServiceWorker");
 import("./helpers/rightClick");
 
 Vue.config.productionTip = false;

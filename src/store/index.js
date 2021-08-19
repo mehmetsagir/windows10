@@ -5,11 +5,13 @@ import FolderList from "../database/folders.json";
 import { getShowFolders, setShowFolders } from "../helpers/showFolders";
 import { getFolderSize, setFolderSize } from "../helpers/folderSize";
 import { getFolderSort, setFolderSort } from "../helpers/folderSort";
+import { getTheme, setTheme } from "../helpers/theme";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    theme: getTheme(),
     folders: getFolders(),
     folderSortType: getFolderSort(),
     folderList: FolderList,
@@ -76,5 +78,9 @@ export default new Vuex.Store({
       setFolderSize(value);
       context.state.folderSize = getFolderSize();
     },
+    setTheme(context, value) {
+      setTheme(value);
+      context.state.theme = getTheme();
+    }
   },
 });

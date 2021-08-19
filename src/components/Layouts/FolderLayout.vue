@@ -37,17 +37,36 @@
       <ul class="folder-actions">
         <li>
           <button @click="updateShowModal">
-            <img src="../../assets/line.svg" width="10" alt="line icon" />
+            <svg x="0px" y="0px" viewBox="0 0 42 42" fill="black">
+              <rect y="20" width="42" height="2" />
+            </svg>
           </button>
         </li>
         <li>
           <button @click="fullScreen">
-            <img src="../../assets/squares.svg" width="10" alt="line icon" />
+            <svg x="0px" y="0px" viewBox="0 0 477 477">
+              <path
+                d="M426.667,85.333h-34.133V51.2c0-28.277-22.923-51.2-51.2-51.2H51.2C22.923,0,0,22.923,0,51.2v290.133
+			c0,28.277,22.923,51.2,51.2,51.2h34.133v34.133c0,28.277,22.923,51.2,51.2,51.2h290.133c28.277,0,51.2-22.923,51.2-51.2V136.533
+			C477.867,108.256,454.944,85.333,426.667,85.333z M51.2,358.4c-9.426,0-17.067-7.641-17.067-17.067V51.2
+			c0-9.426,7.641-17.067,17.067-17.067h290.133c9.426,0,17.067,7.641,17.067,17.067v290.133c0,9.426-7.641,17.067-17.067,17.067
+			H51.2z M443.733,426.667c0,9.426-7.641,17.067-17.067,17.067H136.533c-9.426,0-17.067-7.641-17.067-17.067v-34.133h221.867
+			c28.277,0,51.2-22.923,51.2-51.2V119.467h34.133c9.426,0,17.067,7.641,17.067,17.067V426.667z"
+              />
+            </svg>
           </button>
         </li>
         <li>
           <button @click="closeFolder">
-            <img src="../../assets/cancel.svg" width="10" alt="line icon" />
+            <svg x="0px" y="0px" viewBox="0 0 512.001 512.001" fill="black">
+              <path
+                d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+		L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+		c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+		l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+		L284.286,256.002z"
+              />
+            </svg>
           </button>
         </li>
       </ul>
@@ -158,6 +177,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+html.dark {
+  .container {
+    background: #111;
+    * {
+      color: #e0e0e0;
+    }
+
+    .folder-header {
+      border-bottom-color: #333;
+
+      &.browser {
+        background: rgba(#111, 0.4);
+      }
+
+      .tab-info li {
+        * {
+          color: #e0e0e0;
+        }
+        &.active {
+          background: #333;
+        }
+
+        &.new-tab button:hover {
+          background: #333;
+        }
+      }
+
+      .folder-actions li {
+        &:not(:last-child):hover button {
+          background: #333;
+        }
+        button svg {
+          fill: #e0e0e0;
+        }
+      }
+    }
+
+    .action-bar {
+      background: #111;
+      border-bottom: 1px solid rgba(#333, 0.5);
+
+      ul li {
+        button {
+          &:hover {
+            background: #333;
+          }
+          i {
+            color: rgba(#e0e0e0, 0.7);
+          }
+        }
+      }
+      .search-bar input {
+        background: #333;
+        color: #e0e0e0;
+
+        &:focus {
+          border-color: #333;
+          background: #222;
+        }
+      }
+    }
+
+    .content iframe {
+      background: #fff;
+    }
+  }
+}
 .container {
   min-width: 400px;
   min-height: 300px;
@@ -206,7 +292,7 @@ export default {
         border-top-right-radius: 5% 35%;
 
         &.active {
-          background: #fff !important;
+          background: #fff;
         }
         .info {
           p {
@@ -221,10 +307,12 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 15px;
-          height: 15px;
-          border-radius: 50%;
+          padding-bottom: 2px;
+          width: 20px;
+          height: 20px;
+          border-radius: 20px;
           font-family: Arial;
+          font-weight: 500;
           transition: 250ms;
           &:hover {
             background: rgba(#ddd, 0.4);
@@ -239,7 +327,8 @@ export default {
           button {
             width: 25px;
             height: 25px;
-            font-size: 25px;
+            font-size: 20px;
+            padding-bottom: 0;
             &:hover {
               background: #ddd;
             }
@@ -265,6 +354,10 @@ export default {
           padding: 0 15px;
           transition: 200ms;
         }
+        svg {
+          width: 10px;
+          height: 10px;
+        }
         &:last-child:hover button {
           background: red;
         }
@@ -274,6 +367,7 @@ export default {
       }
     }
   }
+
   .action-bar {
     background: #fff;
     display: flex;
@@ -334,7 +428,7 @@ export default {
 
         &:focus {
           border-color: blue;
-          background: no-repeat;
+          background: none;
         }
       }
     }

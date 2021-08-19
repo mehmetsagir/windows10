@@ -36,6 +36,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.dark .navFolder {
+  color: #e9e9e9;
+  &:hover {
+    background: #333;
+  }
+}
 .navFolder {
   height: 30px;
   width: 180px;

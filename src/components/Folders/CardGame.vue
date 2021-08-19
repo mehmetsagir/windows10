@@ -253,6 +253,19 @@ export default {
 *::selection {
   background: none;
 }
+.dark {
+  .card-container .game-over {
+    background: rgba(#111, 0.7);
+    display: grid;
+    place-content: center;
+    &-modal {
+      background: #111;
+      &-header {
+        border-bottom-color: #333;
+      }
+    }
+  }
+}
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -265,10 +278,10 @@ export default {
     height: 250px;
     width: 250px;
     border-radius: 10px;
-    overflow: hidden;
     cursor: pointer;
     transform: perspective(600px) rotateY(180deg);
     transition: 300ms;
+    overflow: hidden;
     &::before {
       content: "";
       position: absolute;
@@ -277,7 +290,6 @@ export default {
       top: 0;
       left: 0;
       background: black;
-      border-radius: 10px;
     }
     img {
       width: 100%;

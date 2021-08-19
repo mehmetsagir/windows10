@@ -16,7 +16,17 @@
       </div>
       <div class="actions">
         <button class="get-file-image">
-          <img src="../../assets/attachments-icon.svg" alt="attachments-icon" />
+          <svg viewBox="0 0 24 24">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <rect x="0" y="0"></rect>
+              <path
+                d="M14,16 L12,16 L12,12.5 C12,11.6715729 11.3284271,11 10.5,11 C9.67157288,11 9,11.6715729 9,12.5 L9,17.5 C9,19.4329966 10.5670034,21 12.5,21 C14.4329966,21 16,19.4329966 16,17.5 L16,7.5 C16,5.56700338 14.4329966,4 12.5,4 L12,4 C10.3431458,4 9,5.34314575 9,7 L7,7 C7,4.23857625 9.23857625,2 12,2 L12.5,2 C15.5375661,2 18,4.46243388 18,7.5 L18,17.5 C18,20.5375661 15.5375661,23 12.5,23 C9.46243388,23 7,20.5375661 7,17.5 L7,12.5 C7,10.5670034 8.56700338,9 10.5,9 C12.4329966,9 14,10.5670034 14,12.5 L14,16 Z"
+                fill="#000000"
+                fill-rule="nonzero"
+                transform="translate(12.500000, 12.500000) rotate(-315.000000) translate(-12.500000, -12.500000)"
+              ></path>
+            </g>
+          </svg>
           <input type="file" id="file" @change="handleImage" accept="image/*" />
         </button>
         <button @click="changeBackground" class="apply">Apply</button>
@@ -66,6 +76,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.dark {
+  .change-background .actions {
+    background: #111;
+    border-top-color: #222;
+
+    .get-file-image svg path {
+      fill: #e9e9e9;
+    }
+  }
+}
 .change-background {
   width: 100%;
   height: 100%;
@@ -119,7 +139,7 @@ export default {
       padding: 0 50px;
       font-size: 15px;
       color: #fafafa;
-      transition: background 150ms;
+      transition: all 150ms;
       &:hover {
         background: darken(#3b70ff, 10%);
       }
@@ -128,8 +148,9 @@ export default {
       padding: 0 20px;
       margin-right: 10px;
       position: relative;
-      img {
+      svg {
         width: 30px;
+        cursor: pointer;
       }
       input {
         position: absolute;

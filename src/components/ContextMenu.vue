@@ -65,6 +65,12 @@
         Change Background
       </button>
     </li>
+    <li>
+      <button @click="switchTheme">
+        Switch to
+        {{ $store.state.theme === "light" ? "Dark Mode" : "Light Mode" }}
+      </button>
+    </li>
   </ul>
 </template>
 
@@ -94,21 +100,54 @@ export default {
     },
     folderSort(value) {
       this.$store.dispatch("setFolderSort", value);
+      this.hide();
     },
     showDesktopIcons() {
       this.$store.dispatch(
         "setShowFolders",
         !this.$store.state.showDesktopIcons
       );
+      this.hide();
     },
     setFolderSize(size) {
       this.$store.dispatch("setFoldersSize", size);
+      this.hide();
+    },
+    switchTheme() {
+      let theme;
+      if (this.$store.state.theme === "light") {
+        theme = "dark";
+      } else {
+        theme = "light";
+      }
+      this.$store.dispatch("setTheme", theme);
+      this.hide();
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+html.dark {
+  .context-menu {
+    background: #111;
+    * {
+      color: #e0e0e0;
+    }
+    li {
+      &:hover {
+        background: #333;
+      }
+      .sub {
+        background: #111;
+
+        li.selected::before {
+          background: #e0e0e0;
+        }
+      }
+    }
+  }
+}
 .context-menu {
   z-index: 50;
   display: none;
