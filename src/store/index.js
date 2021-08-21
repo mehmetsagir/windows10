@@ -81,6 +81,6 @@ export default new Vuex.Store({
     setTheme(context, value) {
       setTheme(value);
       context.state.theme = getTheme();
-    }
+    },
   },
 });

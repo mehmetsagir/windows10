@@ -1,16 +1,20 @@
 <template>
   <div class="folder-wrapper" v-if="$store.state.showDesktopIcons">
     <div v-for="(folder, key) in this.$store.state.folderList" :key="key">
-      <Folder :icon="folder.icon" :title="folder.title" :path="folder.path" />
+      <FolderButton
+        :icon="folder.icon"
+        :title="folder.title"
+        :path="folder.path"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Folder from "./FolderButton.vue";
+import FolderButton from "./FolderButton.vue";
 export default {
   name: "FolderList",
-  components: { Folder },
+  components: { FolderButton },
 };
 </script>
 

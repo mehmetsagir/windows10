@@ -86,8 +86,8 @@
 
 <script>
 import folderDB from "@/database/folders.json";
-import { setFolder } from "../helpers/folders";
-import { getLocal } from "../helpers/local";
+import { setFolder } from "../../helpers/folders";
+import { getLocal } from "../../helpers/local";
 export default {
   name: "NavigationMenu",
   props: ["menuView"],

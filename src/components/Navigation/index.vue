@@ -8,15 +8,7 @@
         >
           <i class="fab fa-windows"></i>
         </button>
-        <div v-if="$store.state.folders" class="folders">
-          <div
-            v-for="(folder, key) in $store.state.folders"
-            :key="key"
-            class="folder"
-          >
-            <NavFolder :folder="folder" />
-          </div>
-        </div>
+        <NavFolderList />
       </div>
       <ul class="detail">
         <li>
@@ -58,7 +50,7 @@
         </li>
       </ul>
       <transition name="fade">
-        <NavigationMenu
+        <NavMenu
           @sleep="sleep = $event"
           @reloadStatus="reloadStatus = $event"
           @shutDownStatus="shutDownStatus = $event"
@@ -70,8 +62,8 @@
       <transition name="opacity">
         <div class="shut-down" v-if="sleep"></div>
       </transition>
-      <transition name="fade" v-if="reloadStatus">
-        <div class="reload-animation">
+      <transition name="fade">
+        <div class="reload-animation" v-if="reloadStatus">
           <div class="lds-roller">
             <div></div>
             <div></div>
@@ -85,8 +77,8 @@
           <p>Restarting</p>
         </div>
       </transition>
-      <transition name="fade" v-if="shutDownStatus">
-        <div class="reload-animation">
+      <transition name="fade">
+        <div class="reload-animation" v-if="shutDownStatus">
           <div class="lds-roller">
             <div></div>
             <div></div>
@@ -101,41 +93,25 @@
         </div>
       </transition>
     </div>
-    <transition name="fade-calendar">
-      <div class="calendar" v-if="calendar">
-        <div class="time">{{ timeSecond }}</div>
-        <v-calendar
-          class="v-calendar"
-          :attributes="attrs"
-          title-position="left"
-          is-expanded
-          is-dark
-        />
-      </div>
+
+    <transition name="fade-default">
+      <Calendar :timeSecond="timeSecond" v-if="calendar" />
     </transition>
-    <transition name="fade-calendar">
-      <div class="volumeModal" v-if="volume.modal">
-        <h5>Speaker</h5>
-        <div class="detail">
-          <div class="icon" @click="volume.value = 0">
-            <i class="fas fa-volume-mute" v-if="Number(volume.value) === 0"></i>
-            <i class="fas fa-volume-down" v-else-if="volume.value < 50"></i>
-            <i class="fas fa-volume-up" v-else></i>
-          </div>
-          <div class="input-box">
-            <input type="range" min="0" max="100" v-model="volume.value" />
-            <span :style="'width: ' + volume.value + '%'"></span>
-          </div>
-          <p>{{ volume.value }}</p>
-        </div>
-      </div>
+    <transition name="fade-default">
+      <NavVolume
+        :volume="volume.value"
+        @volume="volume.value = $event"
+        v-if="volume.modal"
+      />
     </transition>
   </div>
 </template>
 
 <script>
-import NavigationMenu from "./NavigationMenu";
-import NavFolder from "./NavFolder";
+import NavMenu from "./NavMenu";
+import NavFolderList from "./NavFolderList";
+import Calendar from "./NavCalendar.vue";
+import NavVolume from "./NavVolume.vue";
 export default {
   name: "Navigation",
   data() {
@@ -151,21 +127,13 @@ export default {
         charging: false,
       },
       calendar: false,
-      attrs: [
-        {
-          key: "today",
-          backgroundColor: "#000",
-          dates: new Date(),
-          highlight: true,
-        },
-      ],
       volume: {
         modal: false,
         value: 100,
       },
     };
   },
-  components: { NavFolder, NavigationMenu },
+  components: { NavFolderList, NavMenu, Calendar, NavVolume },
   methods: {
     hide() {
       this.navigationMenuView = false;
@@ -215,25 +183,7 @@ export default {
 *::selection {
   background: none;
 }
-html.dark {
-  .calendar {
-    background: #111;
-    border-color: rgba(#333, 0.5);
-
-    .time {
-      border-bottom-color: rgba(#333, 0.5);
-      color: #e9e9e9;
-    }
-  }
-
-  .volumeModal {
-    background: #111;
-    color: #e9e9e9;
-    h5:hover {
-      background: #222;
-    }
-  }
-
+.dark {
   .navigation {
     background: #111;
 
@@ -265,7 +215,7 @@ html.dark {
 .navigation {
   position: relative;
   max-width: 100vw;
-  height: 30px;
+  height: 35px;
   background: #ddd;
   display: flex;
   align-items: center;
@@ -286,13 +236,6 @@ html.dark {
       i {
         transition: 150ms;
         font-size: 20px;
-      }
-    }
-    .folders {
-      display: flex;
-      overflow: auto;
-      &::-webkit-scrollbar {
-        display: none;
       }
     }
   }
@@ -349,97 +292,6 @@ html.dark {
       &.volume {
         width: 22px;
       }
-    }
-  }
-}
-
-.calendar {
-  position: absolute;
-  bottom: 30px;
-  right: 0;
-  background: rgba(#fff, 0.9);
-  width: 300px;
-  padding-bottom: 20px;
-  border: 1px solid #ccc;
-
-  .time {
-    border-bottom: 1px solid rgba(#ccc, 0.7);
-    padding: 20px;
-    font-size: 35px;
-    color: rgba(black, 0.6);
-    margin-bottom: 10px;
-  }
-
-  .v-calendar {
-    border-radius: 0;
-    border: 0;
-    background: transparent;
-  }
-}
-
-.volumeModal {
-  position: absolute;
-  right: 0;
-  bottom: 30px;
-  width: 320px;
-  background: rgba(#fff, 0.9);
-  padding: 5px 0;
-
-  h5 {
-    padding: 5px 15px;
-    font-size: 18px;
-    font-weight: normal;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(black, 0.1);
-    &:hover {
-      background: #ddd;
-    }
-  }
-
-  .detail {
-    padding: 0 15px;
-    display: flex;
-    height: 40px;
-    align-items: center;
-    justify-content: space-between;
-    .icon {
-      font-size: 20px;
-      cursor: pointer;
-      width: 35px;
-    }
-    .input-box {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      position: relative;
-      input {
-        -webkit-appearance: none;
-        width: 100%;
-        height: 2px;
-        background: #d3d3d3;
-        outline: none;
-
-        &::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 10px;
-          height: 25px;
-          border-radius: 10px;
-          background: #04aa6d;
-          cursor: pointer;
-        }
-      }
-      span {
-        position: absolute;
-        height: 2px;
-        background: #04aa6d;
-      }
-    }
-
-    p {
-      width: 35px;
-      text-align: right;
-      font-size: 18px;
     }
   }
 }
@@ -573,13 +425,13 @@ html.dark {
   opacity: 0;
 }
 
-.fade-calendar-enter-active,
-.fade-calendar-leave-active {
+.fade-default-enter-active,
+.fade-default-leave-active {
   transform: translateY(0);
   transition: 250ms;
 }
-.fade-calendar-enter,
-.fade-calendar-leave-to {
+.fade-default-enter,
+.fade-default-leave-to {
   transform: translateY(50px);
   opacity: 0;
 }

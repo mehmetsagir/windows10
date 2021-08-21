@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Navigation/";
 import Home from "./components/Home.vue";
 import ContextMenu from "./components/ContextMenu";
 import { getLocal } from "./helpers/local";
