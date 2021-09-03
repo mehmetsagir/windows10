@@ -70,5 +70,11 @@
     "icon": "whatsapp",
     "title": "Whatsapp",
     "path": "Whatsapp"
+  },
+  {
+    "id": 13,
+    "icon": "minecraft",
+    "title": "Minecraft",
+    "path": "Minecraft"
   }
 ]

@@ -13,6 +13,7 @@
     <LiveCSS v-if="comp == 'LiveCSS'" />
     <CardGame v-if="comp == 'CardGame'" />
     <Whatsapp v-if="comp == 'Whatsapp'" />
+    <Minecraft v-if="comp == 'Minecraft'" />
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import ChangeBackground from "./ChangeBackground";
 import CardGame from "./CardGame";
 import LiveCSS from "./LiveCSS";
 import Whatsapp from "./Whatsapp";
+import Minecraft from "./Minecraft";
 export default {
   name: "Folder",
   props: {
@@ -52,6 +54,7 @@ export default {
     CardGame,
     LiveCSS,
     Whatsapp,
+    Minecraft,
   },
 };
 </script>
