@@ -7,14 +7,16 @@
         </div>
       </div>
     </div>
-    <FolderList />
-    <VueSelecto
-      :selectableTargets="['.folder']"
-      :selectByClick="true"
-      :selectFromInside="true"
-      :hitRate="30"
-      @select="onSelect"
-    />
+    <div class="select-container">
+      <FolderList />
+      <VueSelecto
+        :selectableTargets="['.folder']"
+        :selectByClick="true"
+        :selectFromInside="true"
+        :hitRate="30"
+        @select="onSelect"
+      />
+    </div>
   </div>
 </template>
 
@@ -53,6 +55,12 @@ export default {
   height: 100%;
   width: 100%;
   position: relative;
+  overflow: hidden;
+}
+
+.select-container {
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
