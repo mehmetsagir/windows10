@@ -255,7 +255,7 @@ html.dark {
   position: absolute;
   top: 25%;
   left: 25%;
-  z-index: 99999;
+  z-index: 9999;
 
   &.fullScreen {
     width: 100% !important;

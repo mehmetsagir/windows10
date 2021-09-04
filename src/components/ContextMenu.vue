@@ -149,7 +149,7 @@ html.dark {
   }
 }
 .context-menu {
-  z-index: 50;
+  z-index: 9999;
   display: none;
   flex-direction: column;
   width: 230px;
