@@ -3,6 +3,7 @@
     <Home class="home" />
     <Navigation />
     <ContextMenu />
+    <MobileWarning v-if="mobileWarning" @continue="mobileWarning = $event" />
   </div>
 </template>
 
@@ -11,9 +12,15 @@ import Navigation from "./components/Navigation/";
 import Home from "./components/Home.vue";
 import ContextMenu from "./components/ContextMenu";
 import { getLocal } from "./helpers/local";
+import MobileWarning from './components/MobileWarning.vue';
 export default {
   name: "App",
-  components: { ContextMenu, Navigation, Home },
+  data() {
+    return {
+      mobileWarning: window.innerWidth > 540 ? false : true
+    }
+  },
+  components: { ContextMenu, Navigation, Home, MobileWarning },
   created() {
     this.$store.dispatch(
       "setFolderSort",
