@@ -40,7 +40,7 @@ import { getLocal, setLocal } from '../../helpers/local';
 		props: ['isNotification'],
 		data() {
 			return {
-				brightness: getLocal('windows-settings').brightness,
+				brightness: getLocal('windows-settings').brightness || 0,
 				collapse: false,
 				selectedRangeWidth: getLocal('windows-settings').brightness ? 100 - Math.abs(getLocal('windows-settings').brightness) : 100,
 				isActive: [],
