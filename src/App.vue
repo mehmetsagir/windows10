@@ -4,6 +4,7 @@
     <Navigation />
     <ContextMenu />
     <MobileWarning v-if="mobileWarning" @continue="mobileWarning = $event" />
+		<div id="brightness-overlay" />
   </div>
 </template>
 
@@ -26,17 +27,19 @@ export default {
       "setFolderSort",
       getLocal("windows-settings").folderSortType
     );
+		document.body.setAttribute('night-light', getLocal("windows-settings").nightLight || false);
   },
 };
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -54,6 +57,24 @@ export default {
   &::-webkit-scrollbar-thumb {
     background: #333;
   }
+}
+
+body[night-light]::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(red, 0.13);
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 1500ms ease;
+}
+
+body[night-light=true]::before {
+  opacity: 1;
 }
 
 html,
@@ -96,5 +117,18 @@ button {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+#brightness-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(black, 0.8);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 1s ease;
 }
 </style>

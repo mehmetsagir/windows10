@@ -48,6 +48,11 @@
         <li @click="toggleCalendarModal" :class="{ active: calendar }">
           <p class="time">{{ time }}</p>
         </li>
+        <li class="notification-btn">
+          <button @click="toggleNotification()">
+            <svg viewBox="0 0 512 512" width="17"><path d="m456.835938 0h-401.667969c-30.421875 0-55.167969 24.746094-55.167969 55.167969v294.238281c0 30.417969 24.746094 55.164062 55.167969 55.164062h127.296875l42.15625 84.316407c7.34375 14.6875 18.78125 23.113281 31.378906 23.113281s24.035156-8.425781 31.378906-23.113281l42.160156-84.316407h127.296876c30.417968 0 55.164062-24.746093 55.164062-55.164062v-294.238281c0-30.421875-24.746094-55.167969-55.164062-55.167969zm25.164062 349.40625c0 13.875-11.289062 25.164062-25.164062 25.164062h-136.566407c-5.683593 0-10.875 3.210938-13.417969 8.292969l-46.304687 92.605469c-1.867187 3.734375-3.621094 5.570312-4.546875 6.273438-.925781-.703126-2.679688-2.539063-4.546875-6.273438l-46.304687-92.605469c-2.539063-5.082031-7.734376-8.292969-13.414063-8.292969h-136.566406c-13.878907 0-25.167969-11.289062-25.167969-25.164062v-294.238281c0-13.878907 11.289062-25.167969 25.167969-25.167969h401.667969c13.875 0 25.164062 11.289062 25.164062 25.167969zm0 0"/></svg>
+          </button>
+        </li>
       </ul>
       <transition name="fade">
         <NavMenu
@@ -93,7 +98,7 @@
         </div>
       </transition>
     </div>
-
+    <Notification :isNotification="isNotification" />
     <transition name="fade-default">
       <Calendar :timeSecond="timeSecond" v-if="calendar" />
     </transition>
@@ -112,6 +117,7 @@ import NavMenu from "./NavMenu";
 import NavFolderList from "./NavFolderList";
 import Calendar from "./NavCalendar.vue";
 import NavVolume from "./NavVolume.vue";
+import Notification from './Notification.vue';
 export default {
   name: "Navigation",
   data() {
@@ -122,6 +128,7 @@ export default {
       sleep: false,
       reloadStatus: false,
       shutDownStatus: false,
+      isNotification: false,
       battery: {
         level: null,
         charging: false,
@@ -133,23 +140,32 @@ export default {
       },
     };
   },
-  components: { NavFolderList, NavMenu, Calendar, NavVolume },
+  components: { NavFolderList, NavMenu, Calendar, NavVolume, Notification },
   methods: {
     hide() {
       this.navigationMenuView = false;
       this.calendar = false;
       this.volume.modal = false;
+      this.isNotification = false;
     },
     toggleValumeModal() {
       this.navigationMenuView = false;
       this.calendar = false;
+      this.isNotification = false;
       this.volume.modal = !this.volume.modal;
     },
     toggleCalendarModal() {
       this.navigationMenuView = false;
       this.volume.modal = false;
+      this.isNotification = false;
       this.calendar = !this.calendar;
     },
+    toggleNotification() {
+      this.navigationMenuView = false;
+      this.volume.modal = false;
+      this.calendar = false;
+      this.isNotification = !this.isNotification;
+    }
   },
   created() {
     setInterval(() => {
@@ -209,6 +225,14 @@ export default {
         background: #333;
         color: #e9e9e9;
       }
+      svg {
+        fill: #fff;
+      }
+      li.notification-btn {
+        padding-right: 10px;
+        padding-left: 10px;
+        cursor: pointer;
+      }
     }
   }
 }
@@ -261,6 +285,9 @@ export default {
     li {
       &:not(:last-child) {
         margin-right: 4px;
+      }
+      svg {
+        fill: black;
       }
       &.battery {
         position: relative;
@@ -445,4 +472,5 @@ export default {
   opacity: 0;
   transition: 800ms;
 }
+
 </style>
