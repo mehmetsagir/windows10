@@ -4,7 +4,7 @@
     <Navigation />
     <ContextMenu />
     <MobileWarning v-if="mobileWarning" @continue="mobileWarning = $event" />
-		<div id="brightness-overlay" />
+    <div id="brightness-overlay" />
   </div>
 </template>
 
@@ -13,13 +13,13 @@ import Navigation from "./components/Navigation/";
 import Home from "./components/Home.vue";
 import ContextMenu from "./components/ContextMenu";
 import { getLocal } from "./helpers/local";
-import MobileWarning from './components/MobileWarning.vue';
+import MobileWarning from "./components/MobileWarning.vue";
 export default {
   name: "App",
   data() {
     return {
-      mobileWarning: window.innerWidth > 540 ? false : true
-    }
+      mobileWarning: window.innerWidth > 540 ? false : true,
+    };
   },
   components: { ContextMenu, Navigation, Home, MobileWarning },
   created() {
@@ -27,19 +27,22 @@ export default {
       "setFolderSort",
       getLocal("windows-settings").folderSortType
     );
-		document.body.setAttribute('night-light', getLocal("windows-settings").nightLight || false);
+    document.body.setAttribute(
+      "night-light",
+      getLocal("windows-settings").nightLight || false
+    );
   },
 };
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -60,7 +63,7 @@ export default {
 }
 
 body[night-light]::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
@@ -73,7 +76,7 @@ body[night-light]::before {
   transition: all 1500ms ease;
 }
 
-body[night-light=true]::before {
+body[night-light="true"]::before {
   opacity: 1;
 }
 

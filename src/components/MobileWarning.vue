@@ -10,11 +10,10 @@ export default {
   methods: {
     proceedAnyway() {
       this.$emit("continue", false);
-    }
-  }
-}
+    },
+  },
+};
 </script>
-
 
 <style lang="scss" scoped>
 .mobile-warning {
@@ -46,6 +45,5 @@ export default {
     border-radius: 5px;
     font-size: 15px;
   }
-  
 }
 </style>
