@@ -1,6 +1,9 @@
 <template>
   <div class="folder-wrapper" v-if="$store.state.showDesktopIcons">
-    <div v-for="(folder, key) in this.$store.state.folderList" :key="key">
+    <div
+      v-for="(folder, key) in this.$store.getters.getInstalledApps"
+      :key="key"
+    >
       <FolderButton
         :icon="folder.icon"
         :title="folder.title"

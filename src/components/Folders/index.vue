@@ -14,6 +14,7 @@
     <CardGame v-if="comp == 'CardGame'" />
     <Whatsapp v-if="comp == 'Whatsapp'" />
     <Minecraft v-if="comp == 'Minecraft'" />
+    <Store v-if="comp == 'Store'" />
   </div>
 </template>
 
@@ -32,6 +33,7 @@ import CardGame from "./CardGame";
 import LiveCSS from "./LiveCSS";
 import Whatsapp from "./Whatsapp";
 import Minecraft from "./Minecraft";
+import Store from "./Store.vue";
 export default {
   name: "Folder",
   props: {
@@ -55,6 +57,7 @@ export default {
     LiveCSS,
     Whatsapp,
     Minecraft,
+    Store,
   },
 };
 </script>

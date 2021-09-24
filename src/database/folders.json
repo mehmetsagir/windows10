@@ -1,80 +1,100 @@
 [
   {
+    "id": 0,
+    "icon": "store",
+    "title": "Microsoft Store",
+    "path": "Store",
+    "installed": true
+  },
+  {
     "id": 1,
     "icon": "chrome",
     "title": "Google Chrome",
-    "path": "Chrome"
+    "path": "Chrome",
+    "installed": true
   },
   {
     "id": 2,
     "icon": "twitter",
     "title": "Twitter",
-    "path": "Twitter"
+    "path": "Twitter",
+    "installed": true
   },
   {
     "id": 3,
     "icon": "fastTyping",
     "title": "Fast Typing",
-    "path": "FastTyping"
+    "path": "FastTyping",
+    "installed": true
   },
   {
     "id": 4,
     "icon": "vueCountriesCities",
     "title": "Vue Countries Cities",
-    "path": "VueCountriesCities"
+    "path": "VueCountriesCities",
+    "installed": true
   },
   {
     "id": 5,
     "icon": "instagram",
     "title": "Instagram",
-    "path": "Instagram"
+    "path": "Instagram",
+    "installed": true
   },
   {
     "id": 6,
     "icon": "todoApp",
     "title": "To do App",
-    "path": "TodoApp"
+    "path": "TodoApp",
+    "installed": true
   },
   {
     "id": 7,
     "icon": "vSvgIcons",
     "title": "Vue Svg Icons",
-    "path": "VSvgIcons"
+    "path": "VSvgIcons",
+    "installed": true
   },
   {
     "id": 8,
     "icon": "animateCSS",
     "title": "Animate CSS",
-    "path": "AnimateCSS"
+    "path": "AnimateCSS",
+    "installed": true
   },
   {
     "id": 9,
     "icon": "githubFinder",
     "title": "Github Finder",
-    "path": "GithubFinder"
+    "path": "GithubFinder",
+    "installed": true
   },
   {
     "id": 10,
     "icon": "liveCSS",
     "title": "Live CSS",
-    "path": "LiveCSS"
+    "path": "LiveCSS",
+    "installed": true
   },
   {
     "id": 11,
     "icon": "cardGame",
     "title": "Card Game",
-    "path": "CardGame"
+    "path": "CardGame",
+    "installed": true
   },
   {
     "id": 12,
     "icon": "whatsapp",
     "title": "Whatsapp",
-    "path": "Whatsapp"
+    "path": "Whatsapp",
+    "installed": true
   },
   {
     "id": 13,
     "icon": "minecraft",
     "title": "Minecraft",
-    "path": "Minecraft"
+    "path": "Minecraft",
+    "installed": false
   }
 ]

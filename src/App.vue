@@ -12,13 +12,16 @@
 import Navigation from "./components/Navigation/";
 import Home from "./components/Home.vue";
 import ContextMenu from "./components/ContextMenu";
-import { getLocal } from "./helpers/local";
+import { getLocal, setLocal } from "./helpers/local";
 import MobileWarning from "./components/MobileWarning.vue";
+import Folders from "./database/folders.json";
 export default {
   name: "App",
   data() {
     return {
       mobileWarning: window.innerWidth > 540 ? false : true,
+      apps: Folders,
+      installedApps: [],
     };
   },
   components: { ContextMenu, Navigation, Home, MobileWarning },
@@ -27,10 +30,20 @@ export default {
       "setFolderSort",
       getLocal("windows-settings").folderSortType
     );
+
     document.body.setAttribute(
       "night-light",
       getLocal("windows-settings").nightLight || false
     );
+
+    if (!getLocal("apps")) {
+      this.apps.forEach((app) => {
+        if (app.installed) {
+          this.$store.dispatch("setApps", app);
+        }
+      });
+      setLocal("apps", this.$store.state.apps);
+    }
   },
 };
 </script>

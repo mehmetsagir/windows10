@@ -69,7 +69,7 @@
     <div class="container">
       <div
         class="folder"
-        v-for="folder in folderList"
+        v-for="folder in this.$store.getters.getInstalledApps"
         :key="folder.id"
         @click="openFolder(folder.path, folder.icon, folder.title)"
       >
@@ -85,17 +85,11 @@
 </template>
 
 <script>
-import folderDB from "@/database/folders.json";
 import { setFolder } from "../../helpers/folders";
 import { getLocal } from "../../helpers/local";
 export default {
   name: "NavigationMenu",
   props: ["menuView"],
-  data() {
-    return {
-      folderList: folderDB,
-    };
-  },
   methods: {
     reload() {
       this.$emit("reloadStatus", true);
@@ -166,7 +160,7 @@ html.dark {
   width: 330px;
   background: rgba(#ddd, 0.9);
   display: flex;
-  z-index: 99;
+  z-index: 9999;
   backdrop-filter: blur(2px);
   .left-bar {
     height: 100%;
