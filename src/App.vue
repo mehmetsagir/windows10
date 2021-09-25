@@ -36,8 +36,20 @@ export default {
       getLocal("windows-settings").nightLight || false
     );
 
-    if (this.$store.state.apps) {
+    if (!getLocal("apps")) {
       setLocal("apps", this.$store.state.apps);
+    } else {
+      if (getLocal("apps").length !== this.apps.length) {
+        const oldApps = getLocal("apps");
+        this.apps.forEach((app) => {
+          oldApps.forEach((oldApp) => {
+            if (app.id === oldApp.id) {
+              app.installed = oldApp.installed;
+            }
+          });
+        });
+        setLocal("apps", this.apps);
+      }
     }
   },
 };
