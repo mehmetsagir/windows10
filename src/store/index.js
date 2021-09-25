@@ -6,6 +6,7 @@ import { getFolderSize, setFolderSize } from "../helpers/folderSize";
 import { getFolderSort, setFolderSort } from "../helpers/folderSort";
 import { getTheme, setTheme } from "../helpers/theme";
 import { getLocal } from "../helpers/local";
+import Folders from "../database/folders.json";
 
 Vue.use(Vuex);
 
@@ -16,7 +17,7 @@ export default new Vuex.Store({
     folderSortType: getFolderSort(),
     showDesktopIcons: getShowFolders(),
     folderSize: getFolderSize(),
-    apps: getLocal("apps") || [],
+    apps: getLocal("apps") || Folders,
     folderSizeList: [
       {
         name: "Large",
@@ -80,14 +81,6 @@ export default new Vuex.Store({
     setTheme(context, value) {
       setTheme(value);
       context.state.theme = getTheme();
-    },
-    setApps(context, value) {
-      const filteredValue = context.state.apps.filter(
-        (app) => app.id === value.id
-      );
-      if (!filteredValue.length) {
-        context.state.apps = [...context.state.apps, value];
-      }
     },
     updateApps(context, value) {
       context.state.apps = value;

@@ -36,12 +36,7 @@ export default {
       getLocal("windows-settings").nightLight || false
     );
 
-    if (!getLocal("apps")) {
-      this.apps.forEach((app) => {
-        if (app.installed) {
-          this.$store.dispatch("setApps", app);
-        }
-      });
+    if (this.$store.state.apps) {
       setLocal("apps", this.$store.state.apps);
     }
   },
