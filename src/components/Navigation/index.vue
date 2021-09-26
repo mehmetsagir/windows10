@@ -49,8 +49,9 @@
           <p class="time">{{ time }}</p>
         </li>
         <li class="notification-btn">
-          <button @click="toggleNotification()">
-            <svg viewBox="0 0 512 512" width="17">
+          <button @click="toggleNotification">
+            <i class="fas fa-comment-alt" v-if="notifications.length"></i>
+            <svg viewBox="0 0 512 512" width="17" v-else>
               <path
                 d="m456.835938 0h-401.667969c-30.421875 0-55.167969 24.746094-55.167969 55.167969v294.238281c0 30.417969 24.746094 55.164062 55.167969 55.164062h127.296875l42.15625 84.316407c7.34375 14.6875 18.78125 23.113281 31.378906 23.113281s24.035156-8.425781 31.378906-23.113281l42.160156-84.316407h127.296876c30.417968 0 55.164062-24.746093 55.164062-55.164062v-294.238281c0-30.421875-24.746094-55.167969-55.164062-55.167969zm25.164062 349.40625c0 13.875-11.289062 25.164062-25.164062 25.164062h-136.566407c-5.683593 0-10.875 3.210938-13.417969 8.292969l-46.304687 92.605469c-1.867187 3.734375-3.621094 5.570312-4.546875 6.273438-.925781-.703126-2.679688-2.539063-4.546875-6.273438l-46.304687-92.605469c-2.539063-5.082031-7.734376-8.292969-13.414063-8.292969h-136.566406c-13.878907 0-25.167969-11.289062-25.167969-25.164062v-294.238281c0-13.878907 11.289062-25.167969 25.167969-25.167969h401.667969c13.875 0 25.164062 11.289062 25.164062 25.167969zm0 0"
               />
@@ -58,6 +59,9 @@
           </button>
         </li>
       </ul>
+      <transition name="drag">
+        <Notification v-if="isNotification" />
+      </transition>
       <transition name="fade">
         <NavMenu
           @sleep="sleep = $event"
@@ -102,7 +106,6 @@
         </div>
       </transition>
     </div>
-    <Notification :isNotification="isNotification" />
     <transition name="fade-default">
       <Calendar :timeSecond="timeSecond" v-if="calendar" />
     </transition>
@@ -117,6 +120,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import NavMenu from "./NavMenu";
 import NavFolderList from "./NavFolderList";
 import Calendar from "./NavCalendar.vue";
@@ -144,6 +148,7 @@ export default {
       },
     };
   },
+  computed: mapState(["notifications"]),
   components: { NavFolderList, NavMenu, Calendar, NavVolume, Notification },
   methods: {
     hide() {
@@ -169,6 +174,9 @@ export default {
       this.volume.modal = false;
       this.calendar = false;
       this.isNotification = !this.isNotification;
+      if (this.notifications.length) {
+        this.$store.dispatch("hideNotifications");
+      }
     },
   },
   created() {
@@ -232,10 +240,8 @@ export default {
       svg {
         fill: #fff;
       }
-      li.notification-btn {
-        padding-right: 10px;
-        padding-left: 10px;
-        cursor: pointer;
+      li.notification-btn button {
+        color: #e9e9e9;
       }
     }
   }
@@ -322,6 +328,15 @@ export default {
       }
       &.volume {
         width: 22px;
+      }
+      &.notification-btn {
+        padding: 0;
+        button {
+          height: 100%;
+          padding-right: 10px;
+          padding-left: 10px;
+          font-size: 16px;
+        }
       }
     }
   }
@@ -443,37 +458,5 @@ export default {
   100% {
     transform: rotate(360deg);
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transform: scale(1);
-  transition: 250ms;
-}
-.fade-enter,
-.fade-leave-to {
-  transform: translate(-30px, 50px) scale(0.8);
-  opacity: 0;
-}
-
-.fade-default-enter-active,
-.fade-default-leave-active {
-  transform: translateY(0);
-  transition: 250ms;
-}
-.fade-default-enter,
-.fade-default-leave-to {
-  transform: translateY(50px);
-  opacity: 0;
-}
-
-.opacity-enter-active,
-.opacity-leave-active {
-  transition: 300ms;
-}
-.opacity-enter,
-.opacity-leave-to {
-  opacity: 0;
-  transition: 800ms;
 }
 </style>

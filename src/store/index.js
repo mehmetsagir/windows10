@@ -5,7 +5,7 @@ import { getShowFolders, setShowFolders } from "../helpers/showFolders";
 import { getFolderSize, setFolderSize } from "../helpers/folderSize";
 import { getFolderSort, setFolderSort } from "../helpers/folderSort";
 import { getTheme, setTheme } from "../helpers/theme";
-import { getLocal } from "../helpers/local";
+import { getLocal, setLocal } from "../helpers/local";
 import Folders from "../database/folders.json";
 
 Vue.use(Vuex);
@@ -18,6 +18,8 @@ export default new Vuex.Store({
     showDesktopIcons: getShowFolders(),
     folderSize: getFolderSize(),
     apps: getLocal("apps") || Folders,
+    notifications: [],
+    showDesktopNotifications: false,
     folderSizeList: [
       {
         name: "Large",
@@ -84,6 +86,31 @@ export default new Vuex.Store({
     },
     updateApps(context, value) {
       context.state.apps = value;
+    },
+    setNotifications(context) {
+      setTimeout(() => {
+        context.state.notifications = getLocal("notifications") || [];
+        context.state.showDesktopNotifications = true;
+      }, 2000);
+    },
+    removeNotification(context, value) {
+      context.state.notifications = context.state.notifications.filter(
+        (notification) => notification.title !== value.title
+      );
+      setLocal("notifications", context.state.notifications);
+    },
+    hideNotifications(context) {
+      context.state.notifications = context.state.notifications.map(
+        (notification) => {
+          if (notification.show === true) notification.show = false;
+          return notification;
+        }
+      );
+      context.state.showDesktopNotifications = false;
+      setLocal("notifications", context.state.notifications);
+    },
+    closeShowDesktopNotifications(context) {
+      context.state.showDesktopNotifications = false;
     },
   },
   getters: {

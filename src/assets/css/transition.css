@@ -1,0 +1,40 @@
+.fade-enter-active,
+.fade-leave-active {
+  transform: scale(1);
+  transition: 250ms;
+}
+.fade-enter,
+.fade-leave-to {
+  transform: translate(-30px, 50px) scale(0.8);
+  opacity: 0;
+}
+
+.fade-default-enter-active,
+.fade-default-leave-active {
+  transform: translateY(0);
+  transition: 250ms;
+}
+.fade-default-enter,
+.fade-default-leave-to {
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.opacity-enter-active,
+.opacity-leave-active {
+  transition: 300ms;
+}
+.opacity-enter,
+.opacity-leave-to {
+  opacity: 0;
+}
+
+.drag-enter-active,
+.drag-leave-active {
+  transition: transform 250ms;
+}
+.drag-enter,
+.drag-leave-to {
+  transform: translateX(105%);
+}
+

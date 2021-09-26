@@ -17,6 +17,9 @@
         @select="onSelect"
       />
     </div>
+    <transition name="drag">
+      <NotificationList v-if="$store.state.showDesktopNotifications" />
+    </transition>
   </div>
 </template>
 
@@ -26,9 +29,10 @@ import FolderList from "./FolderList.vue";
 import Folder from "./Folders";
 import changeBackground from "../helpers/changeBackground";
 import { getLocal } from "../helpers/local";
+import NotificationList from "./Navigation/NotificationList.vue";
 export default {
   name: "Home",
-  components: { Folder, FolderList, VueSelecto },
+  components: { Folder, FolderList, VueSelecto, NotificationList },
   mounted() {
     if (getLocal("windows-settings")) {
       const settings = getLocal("windows-settings");
@@ -62,14 +66,5 @@ export default {
   height: 100%;
   width: 100%;
   overflow: hidden;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: 300ms;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

@@ -48,9 +48,50 @@ export default {
             }
           });
         });
+
+        if (this.apps.length > oldApps.length) {
+          let addNotificationCount = 0;
+          const count = this.apps.length - oldApps.length;
+          const notifications = getLocal("notifications") || [];
+
+          const newAppNotification = {
+            title: "Added new app(s) to Microsoft Store",
+            description: `Added ${count} new apps to the Microsoft Store! Click to install and experience the application.`,
+            show: true,
+            newAppCount: count,
+            actionFolder: {
+              icon: "store",
+              title: "Microsoft Store",
+              path: "Store",
+            },
+          };
+
+          notifications.forEach((noti) => {
+            if (noti.title === newAppNotification.title) {
+              noti.description = `Added ${
+                noti.newAppCount + count
+              } new apps to the Microsoft Store! Click to install and experience the application.`;
+              noti.newAppCount = noti.newAppCount + count;
+              addNotificationCount++;
+            }
+          });
+
+          if (!addNotificationCount > 0) {
+            notifications.push(newAppNotification);
+          }
+
+          setLocal("notifications", notifications);
+        }
         setLocal("apps", this.apps);
       }
     }
+
+    setTimeout(() => {
+      this.$store.dispatch("setNotifications");
+      setTimeout(() => {
+        this.$store.dispatch("hideNotifications");
+      }, 7000);
+    }, 2000);
   },
 };
 </script>

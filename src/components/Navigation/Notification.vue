@@ -1,14 +1,9 @@
 <template>
-  <div :class="isNotification ? 'open notification' : 'notification'">
+  <div class="notification">
     <div class="notification-header">Manage Notifications</div>
     <div class="notifications">
-      <div class="no-notification">No new notifications</div>
-      <!-- <button class="notification-item">
-				<h3 class="notification-title">Windows 11 Update!</h3>
-				<p class="notification-description">
-					Windows'unuzu en yeni sürüm olan 11 ile güncellemek ister misiniz? Hemen şimdi buraya tıklayarak işlemlere başlayabilirsiniz.
-				</p>
-			</button> -->
+      <NotificationList v-if="$store.state.notifications.length" />
+      <div class="no-notification" v-else>No new notifications</div>
     </div>
     <div class="notification-menu">
       <button @click="collapse = !collapse">
@@ -45,9 +40,17 @@
 
 <script>
 import { getLocal, setLocal } from "../../helpers/local";
+import NotificationList from "./NotificationList.vue";
 export default {
   name: "Notification",
-  props: ["isNotification"],
+  components: { NotificationList },
+  props: {
+    isNotification: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
   data() {
     return {
       brightness: getLocal("windows-settings").brightness || 0,
@@ -186,16 +189,10 @@ export default {
   position: fixed;
   top: 0;
   right: 0;
-  transform: translateX(100%);
   background: rgba(#f0f4fa, 0.9);
-  transition: 250ms;
   display: flex;
   flex-direction: column;
   z-index: 99999;
-
-  &.open {
-    transform: translateX(0);
-  }
 
   &-header {
     text-align: right;
