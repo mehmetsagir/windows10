@@ -89,5 +89,12 @@
     "title": "Whatsapp",
     "path": "Whatsapp",
     "installed": true
+  },
+  {
+    "id": 13,
+    "icon": "minecraft",
+    "title": "Minecraft",
+    "path": "Minecraft",
+    "installed": false
   }
 ]
