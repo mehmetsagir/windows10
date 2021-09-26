@@ -96,5 +96,12 @@
     "title": "Minecraft",
     "path": "Minecraft",
     "installed": false
+  },
+  {
+    "id": 14,
+    "icon": "minecraft",
+    "title": "Test App",
+    "path": "testApp",
+    "installed": false
   }
 ]
