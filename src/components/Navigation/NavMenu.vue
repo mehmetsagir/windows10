@@ -160,7 +160,7 @@ html.dark {
   width: 330px;
   background: rgba(#ddd, 0.9);
   display: flex;
-  z-index: 9999;
+  z-index: 99;
   backdrop-filter: blur(2px);
   .left-bar {
     height: 100%;
