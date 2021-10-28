@@ -1,5 +1,5 @@
 # Windows 10
-✨ **Live Demo ->** [Windows UI](https://windows10-ui.vercel.app/)
+✨ **Live Demo ->** [Windows10](https://windows10-ui.vercel.app/)
 
 ## Project setup
 ```
