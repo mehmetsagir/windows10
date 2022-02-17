@@ -279,7 +279,7 @@ export default {
     width: 250px;
     border-radius: 10px;
     cursor: pointer;
-    transform: perspective(600px) rotateY(180deg);
+    transform: rotateY(180deg);
     transition: 300ms;
     overflow: hidden;
     &::before {
@@ -298,7 +298,7 @@ export default {
       object-position: center;
     }
     &.active {
-      transform: perspective(0) rotateY(0);
+      transform: rotateY(0);
       pointer-events: none;
       &::before {
         opacity: 0;
