@@ -1,7 +1,7 @@
 import { getLocal, setLocal } from "./local";
 
 const changeBackground = (
-  imageName = "https://mehmetsagir.com/wallpaper/3.webp"
+  imageName = "https://mehmetsagir.vercel.app/wallpaper/3.webp"
 ) => {
   if (getLocal("windows-settings")) {
     const settings = getLocal("windows-settings");

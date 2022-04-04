@@ -45,11 +45,11 @@ export default {
     return {
       selectedImage: "",
       imagesName: [
-        "https://mehmetsagir.com/wallpaper/1.webp",
-        "https://mehmetsagir.com/wallpaper/2.webp",
-        "https://mehmetsagir.com/wallpaper/3.webp",
-        "https://mehmetsagir.com/wallpaper/4.webp",
-        "https://mehmetsagir.com/wallpaper/gifwallpaper.gif",
+        "https://mehmetsagir.vercel.app/wallpaper/1.webp",
+        "https://mehmetsagir.vercel.app/wallpaper/2.webp",
+        "https://mehmetsagir.vercel.app/wallpaper/3.webp",
+        "https://mehmetsagir.vercel.app/wallpaper/4.webp",
+        "https://mehmetsagir.vercel.app/wallpaper/gifwallpaper.gif",
       ],
     };
   },
