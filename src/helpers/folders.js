@@ -1,11 +1,8 @@
 import { getLocal, setLocal } from "./local";
 
 export const getFolders = () => {
-  if (getLocal("windows-folders")) {
-    return getLocal("windows-folders");
-  } else {
-    return [];
-  }
+  if (getLocal("windows-folders")) return getLocal("windows-folders");
+  return [];
 };
 
 export const setFolder = (title, icon, path) => {
@@ -13,19 +10,16 @@ export const setFolder = (title, icon, path) => {
     const folders = getLocal("windows-folders");
     const result = folders.find((item) => item.title === title);
 
-    if (result) {
-      return false;
-    } else {
-      folders.push({
-        title,
-        icon,
-        path,
-        fullScreen: false,
-        show: true,
-      });
-      setLocal("windows-folders", folders);
-      return true;
-    }
+    if (result) return false;
+    folders.push({
+      title,
+      icon,
+      path,
+      fullScreen: false,
+      show: true,
+    });
+    setLocal("windows-folders", folders);
+    return true;
   } else {
     const folders = [];
     folders.push({
@@ -80,7 +74,7 @@ export const updateFullScreen = (folderName) => {
           title: folder.title,
           icon: folder.icon,
           path: folder.path,
-          show: folder.path,
+          show: folder.show,
           fullScreen: !folder.fullScreen,
         });
       } else {
