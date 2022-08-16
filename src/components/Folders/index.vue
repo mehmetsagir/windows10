@@ -1,20 +1,5 @@
 <template>
-  <div>
-    <Chrome v-if="comp == 'Chrome'" />
-    <Twitter v-if="comp == 'Twitter'" />
-    <FastTyping v-if="comp == 'FastTyping'" />
-    <VueCountriesCities v-if="comp == 'VueCountriesCities'" />
-    <Instagram v-if="comp == 'Instagram'" />
-    <TodoApp v-if="comp == 'TodoApp'" />
-    <VSvgIcons v-if="comp == 'VSvgIcons'" />
-    <AnimateCSS v-if="comp == 'AnimateCSS'" />
-    <GithubFinder v-if="comp == 'GithubFinder'" />
-    <ChangeBackground v-if="comp == 'changeBackground'" />
-    <LiveCSS v-if="comp == 'LiveCSS'" />
-    <CardGame v-if="comp == 'CardGame'" />
-    <Minecraft v-if="comp == 'Minecraft'" />
-    <Store v-if="comp == 'Store'" />
-  </div>
+  <component v-if="comp" :is="comp" />
 </template>
 
 <script>
