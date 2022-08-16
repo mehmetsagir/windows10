@@ -80,7 +80,7 @@
           <div class="lds-roller">
             <div v-for="i in 8" :key="i" />
           </div>
-          <p>{{ reloadStatus ? 'Restarting' : 'Shutting Down' }}</p>
+          <p>{{ reloadStatus ? "Restarting" : "Shutting Down" }}</p>
         </div>
       </transition>
     </div>
