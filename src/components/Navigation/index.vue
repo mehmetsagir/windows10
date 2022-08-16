@@ -76,33 +76,11 @@
         <div class="shut-down" v-if="sleep"></div>
       </transition>
       <transition name="fade">
-        <div class="reload-animation" v-if="reloadStatus">
+        <div class="reload-animation" v-if="reloadStatus || shutDownStatus">
           <div class="lds-roller">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div v-for="i in 8" :key="i" />
           </div>
-          <p>Restarting</p>
-        </div>
-      </transition>
-      <transition name="fade">
-        <div class="reload-animation" v-if="shutDownStatus">
-          <div class="lds-roller">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <p>Shutting Down</p>
+          <p>{{ reloadStatus ? 'Restarting' : 'Shutting Down' }}</p>
         </div>
       </transition>
     </div>
