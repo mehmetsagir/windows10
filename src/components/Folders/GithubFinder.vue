@@ -1,6 +1,6 @@
 <template>
   <Layout folderName="GithubFinder">
-    <iframe src="https://github-finder-ms.netlify.app/"></iframe>
+    <iframe src="https://ms-github-finder.vercel.app/"></iframe>
   </Layout>
 </template>
 
