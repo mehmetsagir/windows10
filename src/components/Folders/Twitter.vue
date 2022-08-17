@@ -1,6 +1,6 @@
 <template>
   <Layout folderName="Twitter">
-    <iframe src="https://twitter-clone-ms.netlify.app/"></iframe>
+    <iframe src="https://ms-twitter-clone.vercel.app/"></iframe>
   </Layout>
 </template>
 
